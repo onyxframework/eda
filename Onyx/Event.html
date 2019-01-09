@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/onyxframework/event">
+  <title>Onyx::Event - github.com/onyxframework/event</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/event/Onyx" data-name="onyx">
+      <a href="../Onyx.html">Onyx</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/event/Onyx/Event" data-name="onyx::event">
+      <a href="../Onyx/Event.html">Event</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Onyx/Event/Channel" data-name="onyx::event::channel">
+      <a href="../Onyx/Event/Channel.html">Channel</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Memory" data-name="onyx::event::channel::memory">
+      <a href="../Onyx/Event/Channel/Memory.html">Memory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Redis" data-name="onyx::event::channel::redis">
+      <a href="../Onyx/Event/Channel/Redis.html">Redis</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Redis" data-name="redis">
+      <a href="../Redis.html">Redis</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Redis/Commands" data-name="redis::commands">
+      <a href="../Redis/Commands.html">Commands</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract struct</span> Onyx::Event
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Onyx/Event.html">Onyx::Event</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>A basic event to inherit from.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Event-driven_architecture#Event_flow_layers" target="_blank">Wikipedia</a>:</p>
+
+<blockquote>a significant temporal state or fact</blockquote>
+
+<p>Code example:</p>
+
+<pre><code><span class="c"># Abstract events are real.</span>
+<span class="k">abstract</span> <span class="k">struct</span> <span class="t">AbstractEvent</span> <span class="o">&lt;</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">Event</span>
+<span class="k">end</span>
+
+<span class="k">struct</span> <span class="t">MyEvent</span> <span class="o">&lt;</span> <span class="t">AbstractEvent</span>
+<span class="k">end</span>
+
+channel.subscribe(<span class="t">AbstractEvent</span>) { <span class="o">|</span>event<span class="o">|</span> puts <span class="s">&quot;Got AbstractEvent&quot;</span> }
+channel.subscribe(<span class="t">MyEvent</span>) { <span class="o">|</span>event<span class="o">|</span> puts <span class="s">&quot;Got MyEvent&quot;</span> }
+
+channel.send(<span class="t">MyEvent</span>.<span class="k">new</span>)
+
+<span class="c"># Got AbstractEvent</span>
+<span class="c"># Got MyEvent</span></code></pre>
+
+
+
+
+
+  <h2>Included Modules</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type">MessagePack::Serializable</li>
+  
+    <li class="other-type">MessagePack::Serializable::Strict</li>
+  
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event.cr#L29" target="_blank">
+        onyx-event.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L4" target="_blank">
+        onyx-event/channel.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/memory.cr#L4" target="_blank">
+        onyx-event/channel/memory.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L7" target="_blank">
+        onyx-event/channel/redis.cr:7
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L224" target="_blank">
+        onyx-event/channel/redis.cr:224
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AMessagePack%3A%3AUnpacker%29-class-method" class="signature"><strong>.new</strong>(pull : MessagePack::Unpacker)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#to_redis_key%3AString-class-method" class="signature"><strong>.to_redis_key</strong> : String</a>
+        
+          <div class="summary"><p>Convert self class name to a Redis stream key.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#redis_message_id-instance-method" class="signature"><strong>#redis_message_id</strong></a>
+        
+          <div class="summary"><p>Return Redis stream message ID associated with this event.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#redis_message_id%3F%3AString%3F-instance-method" class="signature"><strong>#redis_message_id?</strong> : String?</a>
+        
+          <div class="summary"><p>Return Redis stream message ID associated with this event.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_redis_key%3AString-instance-method" class="signature"><strong>#to_redis_key</strong> : String</a>
+        
+          <div class="summary"><p>See <code><a href="../Onyx/Event.html#to_redis_key%3AString-class-method">.to_redis_key</a></code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(pull:MessagePack::Unpacker)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : MessagePack::Unpacker)
+
+        <a class="method-permalink" href="#new%28pull%3AMessagePack%3A%3AUnpacker%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="to_redis_key:String-class-method">
+      <div class="signature">
+        
+        def self.<strong>to_redis_key</strong> : String
+
+        <a class="method-permalink" href="#to_redis_key%3AString-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Convert self class name to a Redis stream key.
+For example, <code>"Namespaced::FooEvent"</code> turns into <code>"namespaced-foo_event"</code>.</p>
+
+<p><span class="flag purple">NOTE</span>  Requires <code><a href="../Onyx/Event/Channel/Redis.html">Channel::Redis</a></code> to be required.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L240" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="redis_message_id-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_message_id</strong>
+
+        <a class="method-permalink" href="#redis_message_id-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return Redis stream message ID associated with this event.</p>
+
+<p><span class="flag purple">NOTE</span>  Requires <code><a href="../Onyx/Event/Channel/Redis.html">Channel::Redis</a></code> to be required.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L231" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="redis_message_id?:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_message_id?</strong> : String?
+
+        <a class="method-permalink" href="#redis_message_id%3F%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return Redis stream message ID associated with this event.</p>
+
+<p><span class="flag purple">NOTE</span>  Requires <code><a href="../Onyx/Event/Channel/Redis.html">Channel::Redis</a></code> to be required.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L231" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_redis_key:String-instance-method">
+      <div class="signature">
+        
+        def <strong>to_redis_key</strong> : String
+
+        <a class="method-permalink" href="#to_redis_key%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>See <code><a href="../Onyx/Event.html#to_redis_key%3AString-class-method">.to_redis_key</a></code>.</p>
+
+<p><span class="flag purple">NOTE</span>  Requires <code><a href="../Onyx/Event/Channel/Redis.html">Channel::Redis</a></code> to be required.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L247" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

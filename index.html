@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "";
+</script>
+
+  <meta id="repository-name" content="github.com/onyxframework/event">
+  <title>README - github.com/onyxframework/event</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Onyx" data-name="onyx">
+      <a href="Onyx.html">Onyx</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Onyx/Event" data-name="onyx::event">
+      <a href="Onyx/Event.html">Event</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Onyx/Event/Channel" data-name="onyx::event::channel">
+      <a href="Onyx/Event/Channel.html">Channel</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Memory" data-name="onyx::event::channel::memory">
+      <a href="Onyx/Event/Channel/Memory.html">Memory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Redis" data-name="onyx::event::channel::redis">
+      <a href="Onyx/Event/Channel/Redis.html">Redis</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Redis" data-name="redis">
+      <a href="Redis.html">Redis</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Redis/Commands" data-name="redis::commands">
+      <a href="Redis/Commands.html">Commands</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<p>&lt;a href="https://onyxframework.org">&lt;img align="right" width="147" height="147" src="https://onyxframework.org/img/logo.svg">&lt;/a></p>
+
+<h1>Onyx::Event</h1>
+
+<p><a href="https://crystal-lang.org/" target="_blank"><img src="https://img.shields.io/badge/built%20with-crystal-000000.svg?style=flat-square" alt="Built with Crystal"/></a>
+<a href="https://travis-ci.org/onyxframework/event" target="_blank"><img src="https://img.shields.io/travis/onyxframework/event/master.svg?style=flat-square" alt="Travis CI build"/></a>
+<a href="https://docs.onyxframework.org/event" target="_blank"><img src="https://img.shields.io/badge/docs-online-brightgreen.svg?style=flat-square" alt="Docs"/></a>
+<a href="https://api.onyxframework.org/event" target="_blank"><img src="https://img.shields.io/badge/api_docs-online-brightgreen.svg?style=flat-square" alt="API docs"/></a>
+<a href="https://github.com/onyxframework/event/releases" target="_blank"><img src="https://img.shields.io/github/release/onyxframework/event.svg?style=flat-square" alt="Latest release"/></a></p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Event-driven_architecture" target="_blank">Event-Driven Architecture</a> framework for <a href="https://crystal-lang.org" target="_blank">Crystal</a>.</p>
+
+<h2>About</h2>
+
+<p><code><a href="Onyx/Event.html">Onyx::Event</a></code> brings the <a href="https://en.wikipedia.org/wiki/Event-driven_architecture" target="_blank">Event-Driven Architecture</a> to the <a href="https://crystal-lang.org" target="_blank">Crystal Language</a>, making it possible to build event-driven applications fast. It allows to emit events and attach subscribers (and also consumers) to these events, via multiple channels.</p>
+
+<h3>Features comparison</h3>
+
+<p>Onyx Framework is an <a href="https://en.wikipedia.org/wiki/Open-core_model" target="_blank">open-core software</a>, which ensures its long-term support and development. Purchasing a commercial license gives you a Github team membership with an access to private repositories containing extra features and also an access to private <a href="https://twist.com" target="_blank">Twist</a> team for extened support. Read more at <a href="https://docs.onyxframework.com/faq" target="_blank">Commercial FAQ</a>.</p>
+
+<p>Feature | Open Source (this repo) | Pro | Enterprise
+--- | :---: | :---: | :---:
+<a href="https://docs.onyxframework.org/event/subscriptions" target="_blank">Subscribers</a> | ✔ | ✔ | ✔
+<a href="https://docs.onyxframework.org/event/channel/memory" target="_blank">Memory channel</a> | ✔ | ✔ | ✔
+<a href="https://docs.onyxframework.org/event/channel/redis" target="_blank">Redis channel</a> | ✔ | ✔ | ✔
+<a href="https://docs.onyxframework.com/event/consumers" target="_blank">Consumers</a> | ✘ | ✔ | ✔
+<a href="https://docs.onyxframework.com/event/store/redis" target="_blank">Redis store</a> | ✘ | ✔ | ✔
+<a href="https://docs.onyxframework.com/event/store/db" target="_blank">DB store</a> | ✘ | ✔ | ✔
+<a href="https://docs.onyxframework.com/event/channel/kafka" target="_blank">Kafka channel</a> | ✘ | ✘ | ✔
+<a href="https://docs.onyxframework.com/event/channel/rabbitmq" target="_blank">RabbitMQ channel</a> | ✘ | ✘ | ✔
+<a href="https://docs.onyxframework.com/event/channel/custom" target="_blank">On-demand custom channels</a> | ✘ | ✘ | ✔
+<a href="https://docs.onyxframework.org/event/store/custom" target="_blank">On-demand custom stores</a> | ✘ | ✘ | ✔
+<strong>License</strong> | <a href="LICENSE" target="_blank">BSD 3-Clause</a> | <a href="https://docs.onyxframework.com/licensing/pro" target="_blank">Commercial</a> | <a href="https://docs.onyxframework.com/licensing/enterprise" target="_blank">Custom</a>
+<strong>Price</strong> | Free | ~~$100~~ $50/month\* | <a href="mailto:enterprise@onyxframework.com" target="_blank">Contact us</a></p>
+
+<p><em>\</em> A 50% discount is applicable until version 1.0 of this software.*</p>
+
+<h2>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class="language-diff">dependencies:
++   onyx-event:
++     github: onyxframework/event
++     version: ~> 0.0.1</code></pre>
+
+<p>This shard follows <a href="http://semver.org/" target="_blank">Semantic Versioning v2.0.0</a>, so check <a href="https://github.com/onyxframework/event/releases" target="_blank">releases</a> and change the <code>version</code> accordingly. Please visit <a href="https://github.com/crystal-lang/shards" target="_blank">github.com/crystal-lang/shards</a> to know more about Crystal shards.</p>
+
+<h2>Usage</h2>
+
+<h3>Documentation</h3>
+
+<p>For a deeper information on usage, please visit:</p>
+
+<ul><li><a href="https://docs.onyxframework.org/event" target="_blank">docs.onyxframework.org/event</a> — handcrafted documentation and guides</li><li><a href="https://api.onyxframework.org/event" target="_blank">api.onyxframework.org/event</a> — auto-generated API documentation</li></ul>
+
+<h3>Example</h3>
+
+<p>First of all, define some events for your application:</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx-event&quot;</span>
+
+<span class="k">struct</span> <span class="t">MyEvent</span> <span class="o">&lt;</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">Event</span>
+  getter foo
+
+  <span class="k">def</span> <span class="m">initialize</span>(@foo : <span class="t">String</span>)
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>&lt;p align="right">&lt;sup>&lt;code>event.cr&lt;/code>&lt;/sup>&lt;/p></p>
+
+<p>Then define an event generator:</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx-event/channel/redis&quot;</span>
+<span class="k">require</span> <span class="s">&quot;./event&quot;</span>
+
+channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">Event</span><span class="t">::</span><span class="t">Channel</span><span class="t">::</span><span class="t">Redis</span>.<span class="k">new</span>
+
+loop <span class="k">do</span>
+  sleep(<span class="n">1</span>)
+  channel.send(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="t">Time</span>.now.to_s))
+  puts <span class="s">&quot;Sent MyEvent&quot;</span>
+<span class="k">end</span></code></pre>
+
+<p>&lt;p align="right">&lt;sup>&lt;code>generator.cr&lt;/code>&lt;/sup>&lt;/p></p>
+
+<p>And a consumer:</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx-event/channel/redis&quot;</span>
+<span class="k">require</span> <span class="s">&quot;./event&quot;</span>
+
+channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">Event</span><span class="t">::</span><span class="t">Channel</span><span class="t">::</span><span class="t">Redis</span>.<span class="k">new</span>
+
+channel.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts <span class="s">&quot;Got </span><span class="i">#{</span><span class="k">typeof</span>(event)<span class="i">}</span><span class="s">: </span><span class="i">#{</span>event.foo<span class="i">}</span><span class="s">&quot;</span>
+<span class="k">end</span>
+
+sleep</code></pre>
+
+<p>&lt;p align="right">&lt;sup>&lt;code>consumer.cr&lt;/code>&lt;/sup>&lt;/p></p>
+
+<p>Then launch the generator and arbitrary amount of consumers:</p>
+
+<pre><code class="language-console">$ crystal generator.cr
+Sent MyEvent
+Sent MyEvent</code></pre>
+
+<pre><code class="language-console">$ crystal consumer.cr
+Got MyEvent: 2019-01-09 17:20:10 +03:00
+Got MyEvent: 2019-01-09 17:20:11 +03:00</code></pre>
+
+<h2>Contributing</h2>
+
+<ol><li>Fork it (https://github.com/onyxframework/rest/fork)</li><li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li><li>Commit your changes (<code>git commit -am 'feat: new feature'</code>) using <a href="https://docs.onyxframework.org/contributing/commit-style" target="_blank">angular-style commits</a></li><li>Push to the branch (<code>git push origin my-new-feature</code>)</li><li>Create a new Pull Request</li></ol>
+
+<h2>Licensing</h2>
+
+<p>This software is licensed under <a href="LICENSE" target="_blank">BSD 3-Clause License</a>.</p>
+
+<p><a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Opensource.svg/100px-Opensource.svg.png" alt="Open Source Initiative"/></a></p>
+</div>
+</body>
+</html>

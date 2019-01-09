@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/onyxframework/event">
+  <title>Onyx::Event::Channel - github.com/onyxframework/event</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/event/Onyx" data-name="onyx">
+      <a href="../../Onyx.html">Onyx</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/event/Onyx/Event" data-name="onyx::event">
+      <a href="../../Onyx/Event.html">Event</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/event/Onyx/Event/Channel" data-name="onyx::event::channel">
+      <a href="../../Onyx/Event/Channel.html">Channel</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Memory" data-name="onyx::event::channel::memory">
+      <a href="../../Onyx/Event/Channel/Memory.html">Memory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Onyx/Event/Channel/Redis" data-name="onyx::event::channel::redis">
+      <a href="../../Onyx/Event/Channel/Redis.html">Redis</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/onyxframework/event/Redis" data-name="redis">
+      <a href="../../Redis.html">Redis</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/event/Redis/Commands" data-name="redis::commands">
+      <a href="../../Redis/Commands.html">Commands</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract class</span> Onyx::Event::Channel
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Onyx/Event/Channel.html">Onyx::Event::Channel</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>An abstract event channel.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Event-driven_architecture#Event_channel" target="_blank">Wikipedia</a>:</p>
+
+<blockquote>An event channel is a mechanism of propagating the information collected
+from an event generator to the event engine ... The events are stored in a queue,
+waiting to be processed later by the event processing engine.</blockquote>
+
+<p>Currently implemented channels: <code><a href="../../Onyx/Event/Channel/Redis.html">Channel::Redis</a></code> and <code><a href="../../Onyx/Event/Channel/Memory.html">Channel::Memory</a></code>.</p>
+
+<p>A channel usually begins its routines upon initialization in separate fibers,
+thus being non-blocking.</p>
+
+
+
+
+
+
+
+
+
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Onyx/Event/Channel/Memory.html">Onyx::Event::Channel::Memory</a></li>
+  
+    <li class="other-type"><a href="../../Onyx/Event/Channel/Redis.html">Onyx::Event::Channel::Redis</a></li>
+  
+  </ul>
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L17" target="_blank">
+        onyx-event/channel.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/memory.cr#L5" target="_blank">
+        onyx-event/channel/memory.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel/redis.cr#L8" target="_blank">
+        onyx-event/channel/redis.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#send%28event%3AEvent%29-instance-method" class="signature"><strong>#send</strong>(event : Event)</a>
+        
+          <div class="summary"><p>Send <em>event</em> to this channel, triggering its subscribers.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#send%28events%3AEnumerable%28Event%29%29-instance-method" class="signature"><strong>#send</strong>(events : Enumerable(Event))</a>
+        
+          <div class="summary"><p>Send multiple <em>events</em> to this channel, triggering its subscribers.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subscribe%28event%3AT.class%2C%26proc%3AProc%28T%2CNil%29%29%3ABoolforallT-instance-method" class="signature"><strong>#subscribe</strong>(event : T.class, &proc : Proc(T, Nil)) : Bool forall T</a>
+        
+          <div class="summary"><p>Subscribes <em>proc</em> to <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unsubscribe%28event%3AT.class%2C%26proc%3AProc%28T%2CNil%29%29%3ABoolforallT-instance-method" class="signature"><strong>#unsubscribe</strong>(event : T.class, &proc : Proc(T, Nil)) : Bool forall T</a>
+        
+          <div class="summary"><p>Unsubscribe a <em>proc</em> subscriber from <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unsubscribe%28event%3AT.class%29%3ABoolforallT-instance-method" class="signature"><strong>#unsubscribe</strong>(event : T.class) : Bool forall T</a>
+        
+          <div class="summary"><p>Unsubscribe <strong>all</strong> subscribers from <em>event</em>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="send(event:Event)-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>send</strong>(event : <a href="../../Onyx/Event.html">Event</a>)
+
+        <a class="method-permalink" href="#send%28event%3AEvent%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Send <em>event</em> to this channel, triggering its subscribers.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="send(events:Enumerable(Event))-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>send</strong>(events : Enumerable(<a href="../../Onyx/Event.html">Event</a>))
+
+        <a class="method-permalink" href="#send%28events%3AEnumerable%28Event%29%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Send multiple <em>events</em> to this channel, triggering its subscribers.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subscribe(event:T.class,&amp;proc:Proc(T,Nil)):BoolforallT-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>subscribe</strong>(event : T.class, &proc : Proc(T, Nil)) : Bool forall T
+
+        <a class="method-permalink" href="#subscribe%28event%3AT.class%2C%26proc%3AProc%28T%2CNil%29%29%3ABoolforallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Subscribes <em>proc</em> to <em>event</em>.
+Returns <code>true</code> in case of success, i.e. it hasn't been already subscribed.</p>
+
+<pre><code>channel.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  pp! <span class="k">typeof</span>(event) <span class="c"># =&gt; MyEvent</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unsubscribe(event:T.class,&amp;proc:Proc(T,Nil)):BoolforallT-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>unsubscribe</strong>(event : T.class, &proc : Proc(T, Nil)) : Bool forall T
+
+        <a class="method-permalink" href="#unsubscribe%28event%3AT.class%2C%26proc%3AProc%28T%2CNil%29%29%3ABoolforallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Unsubscribe a <em>proc</em> subscriber from <em>event</em>.
+Returns <code>false</code> if such a subscriber is not in the subscribers list
+(probably has already been unsubscribed or never been at all).</p>
+
+<pre><code>proc <span class="o">=</span> ->(event : <span class="t">MyEvent</span>) { puts <span class="s">&quot;Got MyEvent!&quot;</span> }
+
+channel.subscribe(<span class="t">MyEvent</span>, <span class="o">&amp;</span>proc)   <span class="c"># =&gt; true</span>
+channel.subscribe(<span class="t">MyEvent</span>, <span class="o">&amp;</span>proc)   <span class="c"># =&gt; false</span>
+channel.unsubscribe(<span class="t">MyEvent</span>, <span class="o">&amp;</span>proc) <span class="c"># =&gt; true</span>
+channel.unsubscribe(<span class="t">MyEvent</span>, <span class="o">&amp;</span>proc) <span class="c"># =&gt; false</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unsubscribe(event:T.class):BoolforallT-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>unsubscribe</strong>(event : T.class) : Bool forall T
+
+        <a class="method-permalink" href="#unsubscribe%28event%3AT.class%29%3ABoolforallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Unsubscribe <strong>all</strong> subscribers from <em>event</em>.
+Returns <code>false</code> in case if there were no any subscribers to the event.</p>
+
+<pre><code>channel.unsubscribe(<span class="t">MyEvent</span>) <span class="c"># =&gt; true</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/event/blob/1dce4c8f70f67d1a8de91856ebb6015b10cc6b88/src/onyx-event/channel.cr#L86" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
