@@ -5,6 +5,7 @@ before_install:
   - docker run -p 6379:6379 -d redis
 script:
   - env REDIS_URL=redis://localhost:6379 crystal spec
+after_success:
   - crystal docs
 deploy:
   provider: pages

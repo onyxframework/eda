@@ -1,19 +1,17 @@
-name: onyx-event
-version: 0.0.1
+name: onyx-eda
+version: 0.2.0
 
 authors:
   - Vlad Faust <mail@vladfaust.com>
 
-crystal: 0.27.0
+crystal: 0.27.2
 
 license: MIT
 
 dependencies:
+  mini_redis:
+    github: vladfaust/mini_redis
+    version: ~> 0.1.0
   msgpack:
     github: crystal-community/msgpack-crystal
-    version: ~> 0.14.2
-
-development_dependencies:
-  redis:
-    github: stefanwille/crystal-redis
-    version: ~> 2.1.1
+    version: ~> 0.14.0

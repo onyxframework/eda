@@ -1,2 +1,2 @@
 require "spec"
-require "../src/onyx-event"
+require "../src/onyx-eda"
