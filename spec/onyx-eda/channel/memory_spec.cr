@@ -1,7 +1,6 @@
 require "../../spec_helper"
-require "../../../src/onyx-eda/channel/redis"
 
-class Onyx::EDA::Channel::Redis
+class Onyx::EDA::Channel::Memory
   struct TestEvent::A
     include Onyx::EDA::Event
 
@@ -21,7 +20,7 @@ class Onyx::EDA::Channel::Redis
   end
 
   describe self do
-    channel = self.new(ENV["REDIS_URL"])
+    channel = self.new
     buffer = Hash(String, String | Int32).new
 
     describe "subscription" do
@@ -39,7 +38,7 @@ class Onyx::EDA::Channel::Redis
         end
 
         channel.emit(TestEvent::A.new("foo"), TestEvent::B.new(42))
-        sleep(0.1)
+        Fiber.yield
 
         buffer["a"].should eq "foo"
         buffer["b"].should eq 42
@@ -48,7 +47,7 @@ class Onyx::EDA::Channel::Redis
         buffer.clear
 
         channel.emit(TestEvent::B.new(43))
-        sleep(0.1)
+        Fiber.yield
 
         buffer["a"]?.should be_nil # A is not emitted
         buffer["b"].should eq 43
@@ -77,7 +76,7 @@ class Onyx::EDA::Channel::Redis
         end
 
         channel.emit(TestEvent::A.new("foo"), TestEvent::B.new(42))
-        sleep(0.1)
+        Fiber.yield
 
         buffer["a"].should eq "foo"
         buffer["b"].should eq 42
@@ -88,6 +87,37 @@ class Onyx::EDA::Channel::Redis
         sub_a.unsubscribe.should be_true
         channel.unsubscribe(sub_b).should be_true
         sub_c.unsubscribe.should be_true
+      end
+    end
+
+    describe "awaiting" do
+      spawn do
+        buffer["a"] = channel.await(TestEvent::A).payload
+      end
+
+      spawn do
+        select
+        when event = channel.await(TestEvent::A, payload: "bar")
+          buffer["b"] = event.payload
+        end
+      end
+
+      spawn do
+        buffer["c"] = channel.await(TestEvent::B, &.payload)
+      end
+
+      Fiber.yield
+
+      it do
+        channel.emit([TestEvent::A.new("foo")])
+        channel.emit([TestEvent::B.new(42)])
+        Fiber.yield
+
+        buffer["a"].should eq "foo"
+        buffer["b"]?.should be_nil # Because it has filter
+        buffer["c"].should eq 42
+
+        buffer.clear
       end
     end
   end

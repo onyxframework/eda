@@ -3,10 +3,13 @@ services:
   - docker
 before_install:
   - docker run -p 6379:6379 -d redis
+  - nvm install 9
+  - npm install shelljs got
 script:
   - env REDIS_URL=redis://localhost:6379 crystal spec
-after_success:
   - crystal docs
+after_success:
+  - node .travis/trigger-dependant-builds.js
 deploy:
   provider: pages
   skip_cleanup: true

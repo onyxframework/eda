@@ -1,308 +1,293 @@
-require "./event"
+require "./channel/subscription"
+require "./channel/duplicate_consumer_error"
+require "./channel/memory"
 
 module Onyx::EDA
-  # An in-memory event channel.
-  # **Asynchronously** notifies all its subscribers on a new `Event`.
-  #
-  # ```
-  # channel = Onyx::EDA::Channel.new
-  # channel.subscribe(Object, MyEvent) { |e| pp e }
-  # channel.emit(MyEvent.new)
-  # sleep(0.01) # Need to yield the control, because all notifications are async
-  # ```
-  class Channel
-    # Emit *events*, notifying all its subscribers.
-    def emit(*events : *T) forall T
-      emit(events)
-    end
+  # An abstract event channel.
+  # It implements basic logic used in other channels.
+  abstract class Channel
+    # Emit *events* returning themselves.
+    abstract def emit(events : Enumerable) : Enumerable
 
     # ditto
-    def emit(events : Enumerable(T)) forall T
-      events.each do |event|
-        notify(event)
-      end
-    end
+    abstract def emit(*events) : Enumerable
 
-    # Subscribe an *object* to *event*, calling *proc* on event emit.
+    # Subscribe to an *event*. Returns a `Subscription` instance, which can be cancelled.
+    # Every subscription instance gets notified about an `#emit`ted event.
     #
-    # Channel distinguishes subscribers by their `object.hash`.
-    # You can have a single object subscribed to multiple events with multiple procs.
-    # You can specify an abstract object, as well as a module in addition to
-    # standard class and struct as *event*.
-    #
-    # Returns an array of the **newly** added event class names to watch,
-    # skipping those which already have *at least one* subscriber.
-    #
-    # BUG: You currently can not pass a `Union` as an *event* argument.
-    # Please subscribe multiple times with different events instead.
+    # This is a non-blocking method, as it spawns a subscription fiber.
     #
     # ```
-    # abstract struct AppEvent < Onyx::EDA::Event
+    # record MyEvent, payload : String do
+    #   include Onyx::EDA::Event
     # end
     #
-    # struct MyEvent < AppEvent
-    #   getter foo
-    #
-    #   def initialize(@foo : String)
-    #   end
+    # sub = channel.subscribe(MyEvent) do |event|
+    #   puts event.payload
     # end
     #
-    # channel.subscribe(Object, AppEvent) do |event|
-    #   pp event.foo
-    # end # => ["MyEvent"]
+    # channel.emit(MyEvent.new("foo"))
     #
-    # channel.subscribe(Object, MyEvent) do |event|
-    #   pp event.foo
-    # end # => []
+    # # Need to yield the control
+    # sleep(0.1)
     #
-    # channel.emit(MyEvent.new("bar")) # Will print "bar" two times
+    # # Can cancel afterwards
+    # sub.unsubscribe
     # ```
     #
-    # You obviously can use it within objects as well:
+    # You can *filter* the events by their getters, for example:
     #
     # ```
-    # class Notifier
-    #   def initialize(channel)
-    #     channel.subscribe(self, MyEvent) { }
-    #   end
-    #
-    #   def stop
-    #     channel.unsubscribe(self)
-    #   end
+    # channel.subscribe(MyEvent, payload: "bar") do |event|
+    #   puts event.payload # Would only output events with "bar" payload
     # end
     #
-    # notifier = Notifier.new(channel)
-    #
-    # # ...
-    #
-    # channel.unsubscribe(notifier)
-    # # Or
-    # notifier.stop
+    # channel.emit(MyEvent.new("foo")) # Would not trigger the above subscription
     # ```
-    def subscribe(object, event : T.class, &proc : T -> Nil) : Enumerable(String) forall T
-      add_subscription(object, event, &proc)
-    end
+    #
+    # See `Subscriber` for an includable subscribing module.
+    abstract def subscribe(event : T.class, **filter, &block : T -> _) : Subscription(T) forall T
 
-    # Unsubscribe an *object* from *event* notifications by *proc*.
-    # The mentioned proc will not be called again for this subscriber.
+    # Begin consuming an *event*. Consumption differs from subscription in a way that
+    # only a single consuming subscription instance with certain *consumer_id* among
+    # all this channel subscribers would be notified about an event after it
+    # successfully acquires a lock. The lock implementation differs in channels.
     #
-    # NOTE: You should pass exactly the same proc object.
-    # `ProcNotSubscribedError` is raised otherwise.
+    # Returns a `Subscription` instance. May raise `DuplicateConsumerError` if a
+    # duplicate consumer ID found for this event in this very process.
     #
-    # Returns an array of event class names which are not watched anymore,
-    # i.e. those which have *zero* subscribers after this method call.
+    # This is a non-blocking method, as it spawns a subscription fiber.
     #
     # ```
-    # proc = ->(e : MyEvent) { pp e }
-    #
-    # channel.subscribe(Object, MyEvent, &proc)
-    #
-    # # Would raise ProcNotSubscribedError
-    # channel.unsubscribe(Object, MyEvent) do |e|
-    #   pp e
+    # record MyEvent, payload : String do
+    #   include Onyx::EDA::Event
     # end
     #
-    # # OK
-    # channel.unsubscribe(Object, MyEvent, &proc) # => ["MyEvent"]
+    # channel = Onyx::EDA::Channel::Redis.new
+    #
+    # sub = channel.subscribe(MyEvent, "MyConsumer") do |event|
+    #   puts event.payload
+    # end
     # ```
-    def unsubscribe(object, event : T.class, &proc : T -> Nil) : Enumerable(String) forall T
-      remove_subscription(object, event, &proc)
-    end
+    #
+    # Launch two subscribing processes, then emit an event in another process:
+    #
+    # ```
+    # # Only one consumer of the two above will be notified
+    # channel.emit(MyEvent.new("foo"))
+    # ```
+    #
+    # See `Consumer` for an includable consumption module.
+    abstract def subscribe(event : T.class, consumer_id : String, &block : T -> _) : Subscription(T) forall T
 
-    # Unsubscribe an *object* from all *event* notifications.
+    # Cancel a *subscription*. Returns a boolean value indicating whether was it
+    # successufully cancelled or not (for instance, it may be already cancelled,
+    # returning `false`).
+    abstract def unsubscribe(subscription : Subscription) : Bool
+
+    # Wait for an *event* to happen, returning the *block* execution result.
+    # An event can be *filter*ed by its getters.
     #
-    # Returns an array of event class names which are not watched anymore,
-    # i.e. those which have *zero* subscribers after this method call.
+    # It is a **blocking** method.
     #
     # ```
-    # channel.subscribe(Object, MyEvent) do |event|
-    #   pp event
+    # record MyEvent, payload : String do
+    #   include Onyx::EDA::Event
     # end
     #
-    # channel.unsubscribe(Object, MyEvent) # => ["MyEvent"]
-    # ```
-    def unsubscribe(object, event : T.class) : Enumerable(String) forall T
-      remove_subscription(object, event)
-    end
-
-    # Unsubscribe an *object* from all events.
-    #
-    # Returns an array of event class names which are not watched anymore,
-    # i.e. those which have *zero* subscribers after this method call.
-    #
-    # ```
-    # channel.subscribe(Object, MyEvent) do |event|
-    #   pp event
+    # # Will block the execution unless MyEvent is received with "foo" payload
+    # payload = channel.await(MyEvent, payload: "foo") do |event|
+    #   event.payload
     # end
     #
-    # channel.unsubscribe(Object) # => ["MyEvent"]
+    # # In another fiber...
+    # channel.emit(MyEvent.new("foo"))
     # ```
-    def unsubscribe(object) : Enumerable(String)
-      remove_subscription(object)
+    #
+    # This method can be used within the `select` block. It works better with the [timer.cr](https://github.com/vladfaust/timer.cr) shard.
+    #
+    # ```
+    # select
+    # when payload = channel.await(MyEvent, &.payload)
+    #   puts payload
+    # when Timer.new(30.seconds)
+    #   raise "Timeout!"
+    # end
+    # ```
+    def await(
+      event : T.class,
+      **filter,
+      &block : T -> U
+    ) : U forall T, U
+      await_channel(T, **filter, &block).receive
     end
 
-    @subscriptions : Hash(String, Hash(UInt64, Set(Tuple(String, Void*, Void*)))) = Hash(String, Hash(UInt64, Set(Tuple(String, Void*, Void*)))).new
-
-    protected def add_subscription(object, event : T.class, &proc : T -> Nil) : Enumerable(String) forall T
-      {%
-        descendants = Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) }
-        raise "#{T} has no descendants" if descendants.empty?
-      %}
-
-      tuple = { {{T.stringify}}, proc.pointer, proc.closure_data }
-      object_hash = object.hash
-
-      event_keys_added = Array(String).new
-
-      {% for object in Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) && !t.abstract? } %}
-        unless hash = @subscriptions[{{object.stringify}}]?
-          hash = Hash(UInt64, Set(Tuple(String, Void*, Void*))).new
-          @subscriptions[{{object.stringify}}] = hash
-          event_keys_added << {{object.stringify}}
-        end
-
-        unless set = hash[object_hash]?
-          set = Set(Tuple(String, Void*, Void*)).new
-          hash[object_hash] = set
-        end
-
-        unless set.includes?(tuple)
-          set << tuple
-        end
-      {% end %}
-
-      return event_keys_added
+    # The same as block-version, but returns an *event* instance itself.
+    #
+    # ```
+    # event = channel.await(MyEvent)
+    # ```
+    #
+    # This method can be used within the `select` block. It works better with the [timer.cr](https://github.com/vladfaust/timer.cr) shard:
+    #
+    # ```
+    # select
+    # when event = channel.await(MyEvent)
+    #   puts event.payload
+    # when Timer.new(30.seconds)
+    #   raise "Timeout!"
+    # end
+    # ```
+    def await(event, **filter)
+      await(event, **filter, &.itself)
     end
 
-    protected def remove_subscription(object, event : T.class, &proc : T -> Nil) : Enumerable(String) forall T
-      {%
-        descendants = Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) }
-        raise "#{T} has no descendants" if descendants.empty?
-      %}
+    protected abstract def acquire_lock?(event : T, consumer_id : String, timeout : Time::Span) : Bool forall T
 
-      tuple = { {{T.stringify}}, proc.pointer, proc.closure_data }
-      object_hash = object.hash
+    # Event hash -> Array(Subscription)
+    @subscriptions = Hash(UInt64, Array(Void*)).new
 
-      anything_removed = false
-      event_keys_removed = Array(String).new
+    # Event hash -> ID -> Subscription
+    @consumers = Hash(UInt64, Hash(String, Void*)).new
 
-      {% for object in Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) && !t.abstract? } %}
-        if hash = @subscriptions[{{object.stringify}}]?
-          if proc_set = hash[object_hash]?
-            if proc_set.includes?(tuple)
-              proc_set.delete(tuple)
-              anything_removed = true
+    protected def emit_impl(events : Enumerable(T)) : Enumerable(T) forall T
+      {% raise "Can only emit non-abstract event objects (given `#{T}`)" unless (T < Reference || T < Struct) && !T.abstract? && !T.union? %}
 
-              if proc_set.empty?
-                hash[object_hash].delete(proc_set)
+      if subscriptions = @subscriptions[T.hash]?
+        subscriptions.each do |void|
+          subscription = Box(Subscription(T)).unbox(void)
 
-                if hash.empty?
-                  @subscriptions.delete({{object.stringify}})
-                  event_keys_removed << {{object.stringify}}
-                end
-              end
-            end
+          events.each do |event|
+            subscription.notify(event)
           end
-        end
-      {% end %}
-
-      raise ProcNotSubscribedError.new(proc) unless anything_removed
-      return event_keys_removed
-    end
-
-    protected def remove_subscription(object, event : T.class) : Enumerable(String) forall T
-      {%
-        descendants = Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) }
-        raise "#{T} has no descendants" if descendants.empty?
-      %}
-
-      object_hash = object.hash
-      event_keys_removed = Array(String).new
-
-      {% for object in Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) && !t.abstract? } %}
-        if hash = @subscriptions[{{object.stringify}}]?
-          removed = hash.delete(object_hash)
-
-          if hash.empty?
-            @subscriptions.delete({{object.stringify}})
-            event_keys_removed << {{object.stringify}}
-          end
-        end
-      {% end %}
-
-      return event_keys_removed
-    end
-
-    protected def remove_subscription(object) : Enumerable(String)
-      object_hash = object.hash
-
-      event_keys_removed = Array(String).new
-
-      @subscriptions.each do |event, hash|
-        removed = hash.delete(object_hash)
-
-        if hash.empty?
-          @subscriptions.delete(event)
-          event_keys_removed << event
         end
       end
 
-      return event_keys_removed
-    end
+      if consumers = @consumers[T.hash]?
+        consumers.each do |_, void|
+          subscription = Box(Subscription(T)).unbox(void)
 
-    protected def notify(event : T) : Nil forall T
-      {%
-        descendants = Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) && !t.abstract? }
-        raise "#{T} has no descendants" if descendants.empty?
-      %}
-
-      {% for object in Object.all_subclasses.select { |t| t <= T && (t < Reference || t < Struct) } %}
-        @subscriptions[{{object.stringify}}]?.try do |hash|
-          hash.each do |_, proc_set|
-            proc_set.each do |(type, pointer, closure_data)|
-              {% begin %}
-                case type
-                {% for type in (Class.all_subclasses.select { |t| t.instance >= T && !(t.instance <= Object) }.map(&.instance) + Object.all_subclasses.select { |t| t >= T && (t < Reference || t < Struct) }).uniq %}
-                  when {{type.stringify}}
-                    spawn Proc({{type}}, Nil).new(pointer, closure_data).call(event.as({{type}}))
-                {% end %}
-                else
-                  raise "BUG: Unmatched event type #{type}"
-                end
-              {% end %}
-            end
+          events.each do |event|
+            subscription.notify(event)
           end
         end
-      {% end %}
+      end
+
+      events
     end
 
-    # Raised if attempted to call [`Channel#unsubscribe(object, event, &proc`)](../Channel.html#unsubscribe%28object%2Cevent%3AT.class%2C%26proc%3AT-%3ENil%29%3AEnumerable%28String%29forallT-instance-method)
-    # with a *proc*, which is not currently in the list of subscribers.
-    #
-    # Typical mistake:
-    #
-    # ```
-    # channel.subscribe(Object, MyEvent) do |event|
-    #   pp event
-    # end
-    #
-    # channel.unsubscribe(Object, MyEvent) do |event|
-    #   pp event
-    # end
-    # ```
-    #
-    # The code above would raise, because these blocks result in two different procs.
-    # Valid approach:
-    #
-    # ```
-    # proc = ->(event : MyEvent) { pp event }
-    # channel.subscribe(Object, MyEvent, &proc)
-    # channel.unsubscribe(Object, MyEvent, &proc)
-    # ```
-    class ProcNotSubscribedError < Exception
-      def initialize(proc)
-        super("Proc #{proc} is not in the list of subscriptions. Make sure you're referencing the exact same proc")
+    protected def emit_impl(*events : *T) : Enumerable forall T
+      {% for t in T %}
+        ary = Array({{t}}).new
+
+        events.each do |event|
+          if event.is_a?({{t}})
+            ary << event
+          end
+        end
+
+        emit_impl(ary)
+      {% end %}
+
+      events
+    end
+
+    protected def subscribe_impl(
+      event : T.class,
+      **filter : **U,
+      &block : T -> _
+    ) : Subscription(T) forall T, U
+      subscription = Subscription(T).new(self, **filter, &block)
+      void = Box(Subscription(T)).box(subscription)
+      (@subscriptions[T.hash] ||= Array(Void*).new).push(void)
+      return subscription
+    end
+
+    protected def subscribe_impl(
+      event : T.class,
+      consumer_id : String,
+      &block : T -> _
+    ) : Subscription(T) forall T, U
+      {% raise "Can only subscribe to non-abstract event objects (given `#{T}`)" unless (T < Reference || T < Struct) && !T.abstract? && !T.union? %}
+
+      existing = @consumers[T.hash]?.try &.[consumer_id]?
+      raise DuplicateConsumerError.new(T, consumer_id) if existing
+
+      channel = self
+
+      subscription = Subscription(T).new(self, consumer_id) do |event|
+        if channel.acquire_lock?(event, consumer_id)
+          block.call(event)
+        end
       end
+
+      (@consumers[T.hash] ||= Hash(String, Void*).new)[consumer_id] = Box(Subscription(T)).box(subscription)
+
+      return subscription
+    end
+
+    protected def unsubscribe_impl(subscription : Subscription(T)) : Bool forall T
+      subscription.cancel
+
+      if consumer_id = subscription.consumer_id
+        return !!@consumers[T.hash]?.try(&.delete(consumer_id))
+      else
+        ary = @subscriptions[T.hash]?
+        return false unless ary
+
+        index = ary.index do |element|
+          Box(Subscription(T)).unbox(element) == subscription
+        end
+
+        deleted = index ? !!ary.delete_at(index) : false
+
+        if deleted && ary.empty?
+          @subscriptions.delete(T.hash)
+        end
+
+        return deleted
+      end
+    end
+
+    # :nodoc:
+    def await_select_action(
+      event : T.class,
+      **filter,
+      &block : T -> _
+    ) forall T
+      await_channel(event, **filter, &block).receive_select_action
+    end
+
+    # :nodoc:
+    def await_select_action(event, **filter)
+      await_select_action(event, **filter, &.itself)
+    end
+
+    protected def await_channel(
+      event klass : T.class,
+      **filter,
+      &block : T -> U
+    ) : ::Channel(U) forall T, U
+      result_channel = ::Channel(U).new
+
+      subscribe(T, **filter) do |event|
+        result_channel.send(block.call(event))
+      end
+
+      result_channel
+    end
+
+    # Return an event object by its `Object#hash`.
+    protected def hash_to_event_type(hash : UInt64)
+      {% begin %}
+        case hash
+        {% for type in Object.all_subclasses.select { |t| t <= Onyx::EDA::Event && (t < Reference || t < Struct) && !t.abstract? } %}
+          when {{type}}.hash then {{type}}
+        {% end %}
+        else
+          raise "BUG: Unknown hash #{hash}"
+        end
+      {% end %}
     end
   end
 end
