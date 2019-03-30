@@ -7,8 +7,12 @@ module Onyx::EDA
       emit_impl(events)
     end
 
-    def emit(*events) : Enumerable
+    def emit(*events : *T) : Enumerable forall T
       emit_impl(*events)
+    end
+
+    def emit(event : T) : T forall T
+      emit_impl(event).first
     end
 
     def subscribe(

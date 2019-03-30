@@ -12,6 +12,9 @@ module Onyx::EDA
     # ditto
     abstract def emit(*events) : Enumerable
 
+    # ditto
+    abstract def emit(event : T) : T forall T
+
     # Subscribe to an *event*. Returns a `Subscription` instance, which can be cancelled.
     # Every subscription instance gets notified about an `#emit`ted event.
     #

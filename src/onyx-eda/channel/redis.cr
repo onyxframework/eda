@@ -150,6 +150,11 @@ module Onyx::EDA
       events
     end
 
+    # ditto
+    def emit(event : T) : T forall T
+      emit({event}).first
+    end
+
     # Subscribe to an *event* reading from its stream.
     # See `Channel#subscribe(event, **filter, &block)`.
     def subscribe(
