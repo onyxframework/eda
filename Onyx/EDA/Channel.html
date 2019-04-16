@@ -46,13 +46,23 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Actor" data-name="onyx::eda::actor">
+      <a href="../../Onyx/EDA/Actor.html">Actor</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx/EDA/Channel" data-name="onyx::eda::channel">
       <a href="../../Onyx/EDA/Channel.html">Channel</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/ProcNotSubscribedError" data-name="onyx::eda::channel::procnotsubscribederror">
-      <a href="../../Onyx/EDA/Channel/ProcNotSubscribedError.html">ProcNotSubscribedError</a>
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/DuplicateConsumerError" data-name="onyx::eda::channel::duplicateconsumererror(t)">
+      <a href="../../Onyx/EDA/Channel/DuplicateConsumerError.html">DuplicateConsumerError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Memory" data-name="onyx::eda::channel::memory">
+      <a href="../../Onyx/EDA/Channel/Memory.html">Memory</a>
       
     </li>
   
@@ -61,8 +71,28 @@
       
     </li>
   
+  <li class="parent " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription" data-name="onyx::eda::channel::subscription(t)">
+      <a href="../../Onyx/EDA/Channel/Subscription.html">Subscription</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription/InactiveError" data-name="onyx::eda::channel::subscription::inactiveerror">
+      <a href="../../Onyx/EDA/Channel/Subscription/InactiveError.html">InactiveError</a>
+      
+    </li>
+  
 </ul>
 
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Consumer" data-name="onyx::eda::consumer(t)">
+      <a href="../../Onyx/EDA/Consumer.html">Consumer</a>
       
     </li>
   
@@ -71,6 +101,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Subscriber" data-name="onyx::eda::subscriber(t)">
+      <a href="../../Onyx/EDA/Subscriber.html">Subscriber</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -78,6 +113,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/UUID" data-name="uuid">
+      <a href="../../UUID.html">UUID</a>
       
     </li>
   
@@ -90,7 +130,7 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Onyx::EDA::Channel
+  <span class="kind">abstract class</span> Onyx::EDA::Channel
 
 </h1>
 
@@ -102,13 +142,8 @@
 
   <h2>Overview</h2>
 
-  <p>An in-memory event channel.
-<strong>Asynchronously</strong> notifies all its subscribers on a new <code><a href="../../Onyx/EDA/Event.html">Event</a></code>.</p>
-
-<pre><code>channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Channel</span>.<span class="k">new</span>
-channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) { <span class="o">|</span>e<span class="o">|</span> pp e }
-channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>)
-sleep(<span class="n">0.01</span>) <span class="c"># Need to yield the control, because all notifications are async</span></code></pre>
+  <p>An abstract event channel.
+It implements basic logic used in other channels.</p>
 
 
 
@@ -120,6 +155,8 @@ sleep(<span class="n">0.01</span>) <span class="c"># Need to yield the control, 
 
   <h2>Direct Known Subclasses</h2>
   <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Onyx/EDA/Channel/Memory.html">Onyx::EDA::Channel::Memory</a></li>
   
     <li class="other-type"><a href="../../Onyx/EDA/Channel/Redis.html">Onyx::EDA::Channel::Redis</a></li>
   
@@ -133,7 +170,28 @@ sleep(<span class="n">0.01</span>) <span class="c"># Need to yield the control, 
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L13" target="_blank">
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription/inactive_error.cr#L1" target="_blank">
+        onyx-eda/channel/subscription/inactive_error.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription.cr#L3" target="_blank">
+        onyx-eda/channel/subscription.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/duplicate_consumer_error.cr#L1" target="_blank">
+        onyx-eda/channel/duplicate_consumer_error.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L8" target="_blank">
         onyx-eda/channel.cr
       </a>
     
@@ -152,44 +210,58 @@ sleep(<span class="n">0.01</span>) <span class="c"># Need to yield the control, 
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#emit%28events%3AEnumerable%28T%29%29forallT-instance-method" class="signature"><strong>#emit</strong>(events : Enumerable(T)) forall T</a>
+        <a href="#await%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EU%29%3AUforallT%2CU-instance-method" class="signature"><strong>#await</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> U) : U forall T, U</a>
         
-          <div class="summary"><p>Emit <em>events</em>, notifying all its subscribers.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#emit%28%2Aevents%3A%2AT%29forallT-instance-method" class="signature"><strong>#emit</strong>(*events : <span class="o">*</span><span class="t">T</span>) forall T</a>
-        
-          <div class="summary"><p>Emit <em>events</em>, notifying all its subscribers.</p></div>
+          <div class="summary"><p>Wait for an <em>event</em> to happen, returning the <em>block</em> execution result.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#subscribe%28object%2Cevent%3AT.class%2C%26proc%3AT-%3ENil%29%3AEnumerable%28String%29forallT-instance-method" class="signature"><strong>#subscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>, &proc : T -> Nil) : Enumerable(String) forall T</a>
+        <a href="#await%28event%2C%2A%2Afilter%29-instance-method" class="signature"><strong>#await</strong>(event, **filter)</a>
         
-          <div class="summary"><p>Subscribe an <em>object</em> to <em>event</em>, calling <em>proc</em> on event emit.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#unsubscribe%28object%2Cevent%3AT.class%2C%26proc%3AT-%3ENil%29%3AEnumerable%28String%29forallT-instance-method" class="signature"><strong>#unsubscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>, &proc : T -> Nil) : Enumerable(String) forall T</a>
-        
-          <div class="summary"><p>Unsubscribe an <em>object</em> from <em>event</em> notifications by <em>proc</em>.</p></div>
+          <div class="summary"><p>The same as block-version, but returns an <em>event</em> instance itself.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#unsubscribe%28object%2Cevent%3AT.class%29%3AEnumerable%28String%29forallT-instance-method" class="signature"><strong>#unsubscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>) : Enumerable(String) forall T</a>
+        <a href="#emit%28events%3AEnumerable%29%3AEnumerable-instance-method" class="signature"><strong>#emit</strong>(events : Enumerable) : Enumerable</a>
         
-          <div class="summary"><p>Unsubscribe an <em>object</em> from all <em>event</em> notifications.</p></div>
+          <div class="summary"><p>Emit <em>events</em> returning themselves.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#unsubscribe%28object%29%3AEnumerable%28String%29-instance-method" class="signature"><strong>#unsubscribe</strong>(object) : Enumerable(String)</a>
+        <a href="#emit%28event%3AT%29%3ATforallT-instance-method" class="signature"><strong>#emit</strong>(event : T) : T forall T</a>
         
-          <div class="summary"><p>Unsubscribe an <em>object</em> from all events.</p></div>
+          <div class="summary"><p>Emit <em>event</em> returning itself.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#emit%28%2Aevents%29%3AEnumerable-instance-method" class="signature"><strong>#emit</strong>(*events) : Enumerable</a>
+        
+          <div class="summary"><p>Emit <em>events</em> returning themselves.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : Onyx::EDA::Channel::Subscription(T) forall T</a>
+        
+          <div class="summary"><p>Begin consuming an <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#subscribe%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : Onyx::EDA::Channel::Subscription(T) forall T</a>
+        
+          <div class="summary"><p>Subscribe to an <em>event</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method" class="signature"><strong>#unsubscribe</strong>(subscription : Subscription) : Bool</a>
+        
+          <div class="summary"><p>Cancel a <em>subscription</em>.</p></div>
         
       </li>
     
@@ -230,198 +302,243 @@ sleep(<span class="n">0.01</span>) <span class="c"># Need to yield the control, 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="emit(events:Enumerable(T))forallT-instance-method">
+    <div class="entry-detail" id="await(event:T.class,**filter,&amp;block:T-&gt;U):UforallT,U-instance-method">
       <div class="signature">
         
-        def <strong>emit</strong>(events : Enumerable(T)) forall T
+        def <strong>await</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> U) : U forall T, U
 
-        <a class="method-permalink" href="#emit%28events%3AEnumerable%28T%29%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#await%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EU%29%3AUforallT%2CU-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Emit <em>events</em>, notifying all its subscribers.</p></div>
+        <div class="doc"><p>Wait for an <em>event</em> to happen, returning the <em>block</em> execution result.
+An event can be <em>filter</em>ed by its getters.</p>
+
+<p>It is a <strong>blocking</strong> method.</p>
+
+<pre><code>record <span class="t">MyEvent</span>, payload : <span class="t">String</span> <span class="k">do</span>
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
+<span class="k">end</span>
+
+<span class="c"># Will block the execution unless MyEvent is received with &quot;foo&quot; payload</span>
+payload <span class="o">=</span> channel.await(<span class="t">MyEvent</span>, payload: <span class="s">&quot;foo&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  event.payload
+<span class="k">end</span>
+
+<span class="c"># In another fiber...</span>
+channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;foo&quot;</span>))</code></pre>
+
+<p>This method can be used within the <code>select</code> block. It works better with the <a href="https://github.com/vladfaust/timer.cr" target="_blank">timer.cr</a> shard.</p>
+
+<pre><code><span class="k">select</span>
+<span class="k">when</span> payload <span class="o">=</span> channel.await(<span class="t">MyEvent</span>, <span class="o">&amp;</span>.payload)
+  puts payload
+<span class="k">when</span> <span class="t">Timer</span>.<span class="k">new</span>(<span class="n">30</span>.seconds)
+  raise <span class="s">&quot;Timeout!&quot;</span>
+<span class="k">end</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L124" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="emit(*events:*T)forallT-instance-method">
+    <div class="entry-detail" id="await(event,**filter)-instance-method">
       <div class="signature">
         
-        def <strong>emit</strong>(*events : <span class="o">*</span><span class="t">T</span>) forall T
+        def <strong>await</strong>(event, **filter)
 
-        <a class="method-permalink" href="#emit%28%2Aevents%3A%2AT%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#await%28event%2C%2A%2Afilter%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Emit <em>events</em>, notifying all its subscribers.</p></div>
+        <div class="doc"><p>The same as block-version, but returns an <em>event</em> instance itself.</p>
+
+<pre><code>event <span class="o">=</span> channel.await(<span class="t">MyEvent</span>)</code></pre>
+
+<p>This method can be used within the <code>select</code> block. It works better with the <a href="https://github.com/vladfaust/timer.cr" target="_blank">timer.cr</a> shard:</p>
+
+<pre><code><span class="k">select</span>
+<span class="k">when</span> event <span class="o">=</span> channel.await(<span class="t">MyEvent</span>)
+  puts event.payload
+<span class="k">when</span> <span class="t">Timer</span>.<span class="k">new</span>(<span class="n">30</span>.seconds)
+  raise <span class="s">&quot;Timeout!&quot;</span>
+<span class="k">end</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L148" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="subscribe(object,event:T.class,&amp;proc:T-&gt;Nil):Enumerable(String)forallT-instance-method">
+    <div class="entry-detail" id="emit(events:Enumerable):Enumerable-instance-method">
       <div class="signature">
-        
-        def <strong>subscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>, &proc : T -> Nil) : Enumerable(String) forall T
+        abstract 
+        def <strong>emit</strong>(events : Enumerable) : Enumerable
 
-        <a class="method-permalink" href="#subscribe%28object%2Cevent%3AT.class%2C%26proc%3AT-%3ENil%29%3AEnumerable%28String%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit%28events%3AEnumerable%29%3AEnumerable-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Subscribe an <em>object</em> to <em>event</em>, calling <em>proc</em> on event emit.</p>
-
-<p>Channel distinguishes subscribers by their <code>object.hash</code>.
-You can have a single object subscribed to multiple events with multiple procs.
-You can specify an abstract object, as well as a module in addition to
-standard class and struct as <em>event</em>.</p>
-
-<p>Returns an array of the <strong>newly</strong> added event class names to watch,
-skipping those which already have <em>at least one</em> subscriber.</p>
-
-<p><span class="flag red">BUG</span>  You currently can not pass a <code>Union</code> as an <em>event</em> argument.
-Please subscribe multiple times with different events instead.</p>
-
-<pre><code><span class="k">abstract</span> <span class="k">struct</span> <span class="t">AppEvent</span> <span class="o">&lt;</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
-<span class="k">end</span>
-
-<span class="k">struct</span> <span class="t">MyEvent</span> <span class="o">&lt;</span> <span class="t">AppEvent</span>
-  getter foo
-
-  <span class="k">def</span> <span class="m">initialize</span>(@foo : <span class="t">String</span>)
-  <span class="k">end</span>
-<span class="k">end</span>
-
-channel.subscribe(<span class="t">Object</span>, <span class="t">AppEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  pp event.foo
-<span class="k">end</span> <span class="c"># =&gt; [&quot;MyEvent&quot;]</span>
-
-channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  pp event.foo
-<span class="k">end</span> <span class="c"># =&gt; []</span>
-
-channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>)) <span class="c"># Will print &quot;bar&quot; two times</span></code></pre>
-
-<p>You obviously can use it within objects as well:</p>
-
-<pre><code><span class="k">class</span> <span class="t">Notifier</span>
-  <span class="k">def</span> <span class="m">initialize</span>(channel)
-    channel.subscribe(<span class="k">self</span>, <span class="t">MyEvent</span>) { }
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="m">stop</span>
-    channel.unsubscribe(<span class="k">self</span>)
-  <span class="k">end</span>
-<span class="k">end</span>
-
-notifier <span class="o">=</span> <span class="t">Notifier</span>.<span class="k">new</span>(channel)
-
-<span class="c"># ...</span>
-
-channel.unsubscribe(notifier)
-<span class="c"># Or</span>
-notifier.stop</code></pre></div>
+        <div class="doc"><p>Emit <em>events</em> returning themselves.
+This method usually blocks until all events are delivered,
+but the subscription block calls happen asynchronously.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="unsubscribe(object,event:T.class,&amp;proc:T-&gt;Nil):Enumerable(String)forallT-instance-method">
+    <div class="entry-detail" id="emit(event:T):TforallT-instance-method">
       <div class="signature">
-        
-        def <strong>unsubscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>, &proc : T -> Nil) : Enumerable(String) forall T
+        abstract 
+        def <strong>emit</strong>(event : T) : T forall T
 
-        <a class="method-permalink" href="#unsubscribe%28object%2Cevent%3AT.class%2C%26proc%3AT-%3ENil%29%3AEnumerable%28String%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit%28event%3AT%29%3ATforallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Unsubscribe an <em>object</em> from <em>event</em> notifications by <em>proc</em>.
-The mentioned proc will not be called again for this subscriber.</p>
-
-<p><span class="flag purple">NOTE</span>  You should pass exactly the same proc object.
-<code><a href="../../Onyx/EDA/Channel/ProcNotSubscribedError.html">ProcNotSubscribedError</a></code> is raised otherwise.</p>
-
-<p>Returns an array of event class names which are not watched anymore,
-i.e. those which have <em>zero</em> subscribers after this method call.</p>
-
-<pre><code>proc <span class="o">=</span> ->(e : <span class="t">MyEvent</span>) { pp e }
-
-channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>, <span class="o">&amp;</span>proc)
-
-<span class="c"># Would raise ProcNotSubscribedError</span>
-channel.unsubscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>e<span class="o">|</span>
-  pp e
-<span class="k">end</span>
-
-<span class="c"># OK</span>
-channel.unsubscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>, <span class="o">&amp;</span>proc) <span class="c"># =&gt; [&quot;MyEvent&quot;]</span></code></pre></div>
+        <div class="doc"><p>Emit <em>event</em> returning itself.
+This method usually blocks until the event is delivered,
+but the subscription block calls happen asynchronously.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L108" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="unsubscribe(object,event:T.class):Enumerable(String)forallT-instance-method">
+    <div class="entry-detail" id="emit(*events):Enumerable-instance-method">
       <div class="signature">
-        
-        def <strong>unsubscribe</strong>(object, event : <span class="t">T</span>.<span class="k">class</span>) : Enumerable(String) forall T
+        abstract 
+        def <strong>emit</strong>(*events) : Enumerable
 
-        <a class="method-permalink" href="#unsubscribe%28object%2Cevent%3AT.class%29%3AEnumerable%28String%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit%28%2Aevents%29%3AEnumerable-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Unsubscribe an <em>object</em> from all <em>event</em> notifications.</p>
-
-<p>Returns an array of event class names which are not watched anymore,
-i.e. those which have <em>zero</em> subscribers after this method call.</p>
-
-<pre><code>channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  pp event
-<span class="k">end</span>
-
-channel.unsubscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="c"># =&gt; [&quot;MyEvent&quot;]</span></code></pre></div>
+        <div class="doc"><p>Emit <em>events</em> returning themselves.
+This method usually blocks until all events are delivered,
+but the subscription block calls happen asynchronously.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L124" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="unsubscribe(object):Enumerable(String)-instance-method">
+    <div class="entry-detail" id="subscribe(event:T.class,consumer_id:String,&amp;block:T-&gt;UNDERSCORE):Onyx::EDA::Channel::Subscription(T)forallT-instance-method">
       <div class="signature">
-        
-        def <strong>unsubscribe</strong>(object) : Enumerable(String)
+        abstract 
+        def <strong>subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : <a href="../../Onyx/EDA/Channel/Subscription.html">Onyx::EDA::Channel::Subscription</a>(T) forall T
 
-        <a class="method-permalink" href="#unsubscribe%28object%29%3AEnumerable%28String%29-instance-method">#</a>
+        <a class="method-permalink" href="#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Unsubscribe an <em>object</em> from all events.</p>
+        <div class="doc"><p>Begin consuming an <em>event</em>. Consumption differs from subscription in a way that
+only a single consuming subscription instance with certain <em>consumer_id</em> among
+all this channel subscribers would be notified about an event after it
+successfully acquires a lock. The lock implementation differs in channels.</p>
 
-<p>Returns an array of event class names which are not watched anymore,
-i.e. those which have <em>zero</em> subscribers after this method call.</p>
+<p>Returns a <code><a href="../../Onyx/EDA/Channel/Subscription.html">Subscription</a></code> instance. May raise <code><a href="../../Onyx/EDA/Channel/DuplicateConsumerError.html">DuplicateConsumerError</a></code> if a
+duplicate consumer ID found for this event in this very process.</p>
 
-<pre><code>channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  pp event
+<p>This is a non-blocking method, as it spawns a subscription fiber.</p>
+
+<pre><code>record <span class="t">MyEvent</span>, payload : <span class="t">String</span> <span class="k">do</span>
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
 <span class="k">end</span>
 
-channel.unsubscribe(<span class="t">Object</span>) <span class="c"># =&gt; [&quot;MyEvent&quot;]</span></code></pre></div>
+channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Channel</span><span class="t">::</span><span class="t">Redis</span>.<span class="k">new</span>
+
+sub <span class="o">=</span> channel.subscribe(<span class="t">MyEvent</span>, <span class="s">&quot;MyConsumer&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts event.payload
+<span class="k">end</span></code></pre>
+
+<p>Launch two subscribing processes, then emit an event in another process:</p>
+
+<pre><code><span class="c"># Only one consumer of the two above will be notified</span>
+channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;foo&quot;</span>))</code></pre>
+
+<p>See <code><a href="../../Onyx/EDA/Consumer.html">Consumer</a></code> for an includable consumption module.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/6a6a7d56b820aca7b5ead0cee6a063627d3287a4/src/onyx-eda/channel.cr#L140" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L88" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="subscribe(event:T.class,**filter,&amp;block:T-&gt;UNDERSCORE):Onyx::EDA::Channel::Subscription(T)forallT-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : <a href="../../Onyx/EDA/Channel/Subscription.html">Onyx::EDA::Channel::Subscription</a>(T) forall T
+
+        <a class="method-permalink" href="#subscribe%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Subscribe to an <em>event</em>. Returns a <code><a href="../../Onyx/EDA/Channel/Subscription.html">Subscription</a></code> instance, which can be cancelled.
+Every subscription instance gets notified about an <code><a href="../../Onyx/EDA/Channel.html#emit%28events%3AEnumerable%29%3AEnumerable-instance-method">#emit</a></code>ted event.</p>
+
+<p>This is a non-blocking method, as it spawns a subscription fiber.</p>
+
+<pre><code>record <span class="t">MyEvent</span>, payload : <span class="t">String</span> <span class="k">do</span>
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
+<span class="k">end</span>
+
+sub <span class="o">=</span> channel.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts event.payload
+<span class="k">end</span>
+
+channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;foo&quot;</span>))
+
+<span class="c"># Need to yield the control</span>
+sleep(<span class="n">0.1</span>)
+
+<span class="c"># Can cancel afterwards</span>
+sub.unsubscribe</code></pre>
+
+<p>You can <em>filter</em> the events by their getters, for example:</p>
+
+<pre><code>channel.subscribe(<span class="t">MyEvent</span>, payload: <span class="s">&quot;bar&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts event.payload <span class="c"># Would only output events with &quot;bar&quot; payload</span>
+<span class="k">end</span>
+
+channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;foo&quot;</span>)) <span class="c"># Would not trigger the above subscription</span></code></pre>
+
+<p>See <code><a href="../../Onyx/EDA/Subscriber.html">Subscriber</a></code> for an includable subscribing module.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unsubscribe(subscription:Subscription):Bool-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>unsubscribe</strong>(subscription : <a href="../../Onyx/EDA/Channel/Subscription.html">Subscription</a>) : Bool
+
+        <a class="method-permalink" href="#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Cancel a <em>subscription</em>. Returns a boolean value indicating whether was it
+successufully cancelled or not (for instance, it may be already cancelled,
+returning <code>false</code>).</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>

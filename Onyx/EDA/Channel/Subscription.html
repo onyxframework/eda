@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.2">
+
+
+<link href="../../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../../";
+</script>
+
+  <meta id="repository-name" content="github.com/onyxframework/eda">
+  <title>Onyx::EDA::Channel::Subscription(T) - github.com/onyxframework/eda</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx" data-name="onyx">
+      <a href="../../../Onyx.html">Onyx</a>
+      
+        <ul>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx/EDA" data-name="onyx::eda">
+      <a href="../../../Onyx/EDA.html">EDA</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Actor" data-name="onyx::eda::actor">
+      <a href="../../../Onyx/EDA/Actor.html">Actor</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx/EDA/Channel" data-name="onyx::eda::channel">
+      <a href="../../../Onyx/EDA/Channel.html">Channel</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/DuplicateConsumerError" data-name="onyx::eda::channel::duplicateconsumererror(t)">
+      <a href="../../../Onyx/EDA/Channel/DuplicateConsumerError.html">DuplicateConsumerError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Memory" data-name="onyx::eda::channel::memory">
+      <a href="../../../Onyx/EDA/Channel/Memory.html">Memory</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Redis" data-name="onyx::eda::channel::redis">
+      <a href="../../../Onyx/EDA/Channel/Redis.html">Redis</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription" data-name="onyx::eda::channel::subscription(t)">
+      <a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription/InactiveError" data-name="onyx::eda::channel::subscription::inactiveerror">
+      <a href="../../../Onyx/EDA/Channel/Subscription/InactiveError.html">InactiveError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Consumer" data-name="onyx::eda::consumer(t)">
+      <a href="../../../Onyx/EDA/Consumer.html">Consumer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Event" data-name="onyx::eda::event">
+      <a href="../../../Onyx/EDA/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Subscriber" data-name="onyx::eda::subscriber(t)">
+      <a href="../../../Onyx/EDA/Subscriber.html">Subscriber</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/UUID" data-name="uuid">
+      <a href="../../../UUID.html">UUID</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Onyx::EDA::Channel::Subscription(T)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Onyx/EDA/Channel/Subscription.html">Onyx::EDA::Channel::Subscription(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>An event subscription instance. All subscribers are notified about an event unless
+it doesn't match the filters.</p>
+
+<p>You should not initialize this class manually, use <code><a href="../../../Onyx/EDA/Channel.html#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method">Channel#subscribe</a></code> instead.
+When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Channel/Subscription.html#unsubscribe-instance-method">#unsubscribe</a></code> method on a
+<code><a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a></code> instance or <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">Channel#unsubscribe</a></code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription/inactive_error.cr#L2" target="_blank">
+        onyx-eda/channel/subscription/inactive_error.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription.cr#L10" target="_blank">
+        onyx-eda/channel/subscription.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#active%3F-instance-method" class="signature"><strong>#active?</strong></a>
+        
+          <div class="summary"><p>Whether is this subscription currently active.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unsubscribe-instance-method" class="signature"><strong>#unsubscribe</strong></a>
+        
+          <div class="summary"><p>Cancel this subscription.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="active?-instance-method">
+      <div class="signature">
+        
+        def <strong>active?</strong>
+
+        <a class="method-permalink" href="#active%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Whether is this subscription currently active.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unsubscribe-instance-method">
+      <div class="signature">
+        
+        def <strong>unsubscribe</strong>
+
+        <a class="method-permalink" href="#unsubscribe-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Cancel this subscription.
+May raise <code><a href="../../../Onyx/EDA/Channel/Subscription/InactiveError.html">InactiveError</a></code> if the subscription is currently not active
+(i.e. already cancelled).</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/subscription.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

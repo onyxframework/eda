@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/onyxframework/eda">
-  <title>Onyx - github.com/onyxframework/eda</title>
+  <title>UUID - github.com/onyxframework/eda</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent open current" data-id="github.com/onyxframework/eda/Onyx" data-name="onyx">
+  <li class="parent " data-id="github.com/onyxframework/eda/Onyx" data-name="onyx">
       <a href="Onyx.html">Onyx</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/onyxframework/eda/UUID" data-name="uuid">
+  <li class=" current" data-id="github.com/onyxframework/eda/UUID" data-name="uuid">
       <a href="UUID.html">UUID</a>
       
     </li>
@@ -130,18 +130,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Onyx
+  <span class="kind">struct</span> UUID
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="UUID.html">UUID</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>Powerful framework for modern applications.
-See <a href="https://onyxframework.org" target="_blank">onyxframework.org</a>.</p>
+  <p>Extensions to stdlib <code><a href="UUID.html">UUID</a></code> struct.</p>
 
 
 
@@ -159,8 +160,8 @@ See <a href="https://onyxframework.org" target="_blank">onyxframework.org</a>.</
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda.cr#L3" target="_blank">
-        onyx-eda.cr
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/ext/uuid/msgpack.cr#L5" target="_blank">
+        onyx-eda/ext/uuid/msgpack.cr
       </a>
     
     <br/>
@@ -170,9 +171,33 @@ See <a href="https://onyxframework.org" target="_blank">onyxframework.org</a>.</
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28pull%3AMessagePack%3A%3AUnpacker%29-class-method" class="signature"><strong>.new</strong>(pull : MessagePack::Unpacker)</a>
+        
+          <div class="summary"><p>Read from MessagePack input.</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#to_msgpack%28packer%3AMessagePack%3A%3APacker%29-instance-method" class="signature"><strong>#to_msgpack</strong>(packer : MessagePack::Packer)</a>
+        
+          <div class="summary"><p>Serialize into MessagePack bytes.</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -180,12 +205,84 @@ See <a href="https://onyxframework.org" target="_blank">onyxframework.org</a>.</
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(pull:MessagePack::Unpacker)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : MessagePack::Unpacker)
+
+        <a class="method-permalink" href="#new%28pull%3AMessagePack%3A%3AUnpacker%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Read from MessagePack input.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/ext/uuid/msgpack.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="to_msgpack(packer:MessagePack::Packer)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_msgpack</strong>(packer : MessagePack::Packer)
+
+        <a class="method-permalink" href="#to_msgpack%28packer%3AMessagePack%3A%3APacker%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Serialize into MessagePack bytes.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/ext/uuid/msgpack.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

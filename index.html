@@ -46,13 +46,23 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Actor" data-name="onyx::eda::actor">
+      <a href="Onyx/EDA/Actor.html">Actor</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel" data-name="onyx::eda::channel">
       <a href="Onyx/EDA/Channel.html">Channel</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/ProcNotSubscribedError" data-name="onyx::eda::channel::procnotsubscribederror">
-      <a href="Onyx/EDA/Channel/ProcNotSubscribedError.html">ProcNotSubscribedError</a>
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/DuplicateConsumerError" data-name="onyx::eda::channel::duplicateconsumererror(t)">
+      <a href="Onyx/EDA/Channel/DuplicateConsumerError.html">DuplicateConsumerError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Memory" data-name="onyx::eda::channel::memory">
+      <a href="Onyx/EDA/Channel/Memory.html">Memory</a>
       
     </li>
   
@@ -61,8 +71,28 @@
       
     </li>
   
+  <li class="parent " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription" data-name="onyx::eda::channel::subscription(t)">
+      <a href="Onyx/EDA/Channel/Subscription.html">Subscription</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Channel/Subscription/InactiveError" data-name="onyx::eda::channel::subscription::inactiveerror">
+      <a href="Onyx/EDA/Channel/Subscription/InactiveError.html">InactiveError</a>
+      
+    </li>
+  
 </ul>
 
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Consumer" data-name="onyx::eda::consumer(t)">
+      <a href="Onyx/EDA/Consumer.html">Consumer</a>
       
     </li>
   
@@ -71,6 +101,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Subscriber" data-name="onyx::eda::subscriber(t)">
+      <a href="Onyx/EDA/Subscriber.html">Subscriber</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -78,6 +113,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/onyxframework/eda/UUID" data-name="uuid">
+      <a href="UUID.html">UUID</a>
       
     </li>
   
@@ -94,54 +134,48 @@
 
 <p><a href="https://crystal-lang.org/" target="_blank"><img src="https://img.shields.io/badge/built%20with-crystal-000000.svg?style=flat-square" alt="Built with Crystal"/></a>
 <a href="https://travis-ci.org/onyxframework/eda" target="_blank"><img src="https://img.shields.io/travis/onyxframework/eda/master.svg?style=flat-square" alt="Travis CI build"/></a>
+<a href="https://docs.onyxframework.org/eda" target="_blank"><img src="https://img.shields.io/badge/docs-online-brightgreen.svg?style=flat-square" alt="Docs"/></a>
 <a href="https://api.onyxframework.org/eda" target="_blank"><img src="https://img.shields.io/badge/api_docs-online-brightgreen.svg?style=flat-square" alt="API docs"/></a>
 <a href="https://github.com/onyxframework/eda/releases" target="_blank"><img src="https://img.shields.io/github/release/onyxframework/eda.svg?style=flat-square" alt="Latest release"/></a></p>
 
 <p>An Event-Driven Architecture framework to build reactive apps.</p>
 
-<h2>Supporters ❤️</h2>
-
-<p>Thanks to all my patrons, I can continue working on beautiful Open Source Software! 🙏</p>
-
-<p><a href="https://github.com/ljuti" target="_blank">Lauri Jutila</a>, <a href="https://seendex.ru" target="_blank">Alexander Maslov</a>, Dainel Vera</p>
-
-<p><em>You can become a patron too in exchange of prioritized support and other perks</em></p>
-
-<p>&lt;a href="https://www.patreon.com/vladfaust">&lt;img height="50" src="https://onyxframework.org/img/patreon-button.svg">&lt;/a></p>
-
 <h2>About 👋</h2>
 
 <p>Onyx::EDA is an <a href="https://en.wikipedia.org/wiki/Event-driven_architecture" target="_blank">Event-Driven Architecture</a> framework. It allows to emit certain <em>events</em> and subscribe to them.</p>
 
-<p>It has several <em>channels</em> implemented:</p>
+<p>Currently the framework has these <em>channels</em> implemented:</p>
 
-<ul><li><a href="https://api.onyxframework.org/eda/Onyx/EDA/Channel.html" target="_blank">In-memory channel</a></li><li><a href="https://api.onyxframework.org/eda/Onyx/EDA/Channel/Redis.html" target="_blank">Redis channel</a> (working on <a href="https://redis.io/topics/streams-intro" target="_blank">Redis streams</a>)</li></ul>
+<ul><li><a href="https://api.onyxframework.org/eda/Onyx/EDA/Channel/Memory.html" target="_blank">Memory channel</a></li><li><a href="https://api.onyxframework.org/eda/Onyx/EDA/Channel/Redis.html" target="_blank">Redis channel</a> (working on <a href="https://redis.io/topics/streams-intro" target="_blank">Redis streams</a>)</li></ul>
+
+<p>Onyx::EDA is a <strong>real-time</strong> events framework. It does not process events happend in the past and currently does not care about reliability in case of third-party service dependant channels (i.e. Redis).</p>
+
+<p>👍 The framework is a great choice for reactive and/or distributed applications, effectively allowing to have multiple loosely-coupled components which do not directly interact with each other, but rely on events instead.</p>
+
+<p>👎 However, Onyx::EDA is not a good choice for tasks requiring reliability, for example, background processing. If a Redis consumer dies during processing, the event is likely to not be processed. This behaviour may change in the future.</p>
 
 <h2>Installation 📥</h2>
 
 <p>Add this to your application's <code>shard.yml</code>:</p>
 
 <pre><code class="language-yaml">dependencies:
+  onyx:
+    github: onyxframework/onyx
+    version: ~> 0.4.0
   onyx-eda:
     github: onyxframework/eda
-    version: ~> 0.2.0</code></pre>
+    version: ~> 0.3.0</code></pre>
 
-<p>This shard follows <a href="http://semver.org/" target="_blank">Semantic Versioning v2.0.0</a>, so check <a href="https://github.com/onyxframework/rest/releases" target="_blank">releases</a> and change the <code>version</code> accordingly. Please visit <a href="https://github.com/crystal-lang/shards" target="_blank">github.com/crystal-lang/shards</a> to know more about Crystal shards.</p>
+<p>This shard follows <a href="http://semver.org/" target="_blank">Semantic Versioning v2.0.0</a>, so check <a href="https://github.com/vladfaust/timer.cr/releases" target="_blank">releases</a> and change the <code>version</code> accordingly.</p>
+
+<blockquote>Note that until Crystal is officially released, this shard would be in beta state (<code>0.*.*</code>), with every <strong>minor</strong> release considered breaking. For example, <code>0.1.0</code> → <code>0.2.0</code> is breaking and <code>0.1.0</code> → <code>0.1.1</code> is not.</blockquote>
 
 <h2>Usage 💻</h2>
 
-<p>First of all, you need to create a channel:</p>
+<p>First of all, you must require channels you'd need:</p>
 
-<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx-eda&quot;</span>
-channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Channel</span>.<span class="k">new</span>
-
-<span class="c"># or</span>
-<span class="c">#</span>
-
-<span class="k">require</span> <span class="s">&quot;onyx-eda&quot;</span>
-<span class="k">require</span> <span class="s">&quot;onyx-eda/channel/redis&quot;</span>
-
-channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Channel</span><span class="t">::</span><span class="t">Redis</span>.<span class="k">new</span>(<span class="s">&quot;redis://localhost:6379&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx/eda/memory&quot;</span>
+<span class="k">require</span> <span class="s">&quot;onyx/eda/redis&quot;</span></code></pre>
 
 <p>Then define events to emit:</p>
 
@@ -154,73 +188,142 @@ channel <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
-<p>Subscribe an object to the event:</p>
+<h3>Basic subscribing</h3>
 
-<pre><code class="language-crystal"><span class="c"># Top-level subscription</span>
-channel.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+<p>You must define a block which would be run on incoming event:</p>
+
+<pre><code class="language-crystal"><span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  pp event.foo
+<span class="k">end</span></code></pre>
+
+<p>Subscribing and emitting are <strong>asynchronous</strong> operations. You must then <code>yield</code> the control with <code>sleep</code> or <code>Fiber.yield</code> to let notifications reach their subscriptions:</p>
+
+<pre><code class="language-crystal"><span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))
+sleep(<span class="n">1</span>)</code></pre>
+
+<p>Output, as expected:</p>
+
+<pre><code>bar</code></pre>
+
+<p>You can cancel a subscription as well:</p>
+
+<pre><code class="language-crystal">sub <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
   pp event.foo
 <span class="k">end</span>
 
-<span class="c"># Object-level subscriptions</span>
-<span class="c">#</span>
+sub.unsubscribe</code></pre>
 
-<span class="k">class</span> <span class="t">Notifier</span>
-  <span class="k">def</span> <span class="m">initialize</span>(channel)
-    channel.subscribe(<span class="k">self</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-      pp event.foo
-    <span class="k">end</span>
+<h3>Subscribing with filters</h3>
+
+<p>You can filter incoming events and run the subscription block only if the event's getters match the filter:</p>
+
+<pre><code class="language-crystal"><span class="c"># Would only put &quot;bar&quot;</span>
+<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.subscribe(<span class="t">MyEvent</span>, foo: <span class="s">&quot;bar&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  pp event.foo
+<span class="k">end</span>
+
+<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;qux&quot;</span>)) <span class="c"># Would not notify the subscription above</span>
+<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>)) <span class="c"># OK, condition is met</span></code></pre>
+
+<h3>Consuming</h3>
+
+<p>You can create an event consumption instead of a subscription. From docs:</p>
+
+<blockquote>Consumption differs from subscription in a way that only a single consuming subscription instance with certain <em>consumer_id</em> among all this channel subscribers would be notified about an event after it successfully acquires a lock. The lock implementation differs in channels.</blockquote>
+
+<p>In this code only <strong>one</strong> <code>"bar"</code> will be put, because both subscriptions have <code>"MyConsumer"</code> as the consumer ID:</p>
+
+<pre><code class="language-crystal">sub1 <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.subscribe(<span class="t">MyEvent</span>, <span class="s">&quot;MyConsumer&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts event.foo
+<span class="k">end</span>
+
+sub2 <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.subscribe(<span class="t">MyEvent</span>, <span class="s">&quot;MyConsumer&quot;</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  puts event.foo
+<span class="k">end</span>
+
+<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))</code></pre>
+
+<p>The consuming works as expected with <a href="https://api.onyxframework.org/eda/Onyx/EDA/Channel/Redis.html" target="_blank">Redis channel</a> as well. It relies on <a href="https://redis.io/topics/streams-intro" target="_blank">Redis streams</a>. However, if a consumer crashes, then no other consumer with the same ID would try to process this event anymore (i.e. the behavior is unreliable). This may change in the future.</p>
+
+<p>Note that you can not use event filters while consuming.</p>
+
+<h3>Awaiting</h3>
+
+<p>It is possible to await for a certain event to happen in a <strong>blocking</strong> manner:</p>
+
+<pre><code class="language-crystal"><span class="c"># Will block the execution until the event is received</span>
+<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.await(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
+  pp event.foo
+<span class="k">end</span></code></pre>
+
+<p>It is particularly useful in <code>select</code> blocks:</p>
+
+<pre><code class="language-crystal"><span class="k">select</span>
+<span class="k">when</span> event <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory.await(<span class="t">MyEvent</span>)
+  pp event.foo
+<span class="k">when</span> <span class="t">Timer</span>.<span class="k">new</span>(<span class="n">30</span>.seconds)
+  raise <span class="s">&quot;Timeout!&quot;</span>
+<span class="k">end</span></code></pre>
+
+<p><em>💡 See <a href="https://github.com/vladfaust/timer.cr" target="_blank">timer.cr</a> for a timer shard.</em></p>
+
+<p>You can use filters with awaiting, making it possible to wait for a specific event hapenning:</p>
+
+<pre><code class="language-crystal">record <span class="t">MyEventHandled</span>, parent_event_id : <span class="t">UUID</span> <span class="k">do</span>
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
+<span class="k">end</span>
+
+event <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.redis.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))
+
+<span class="k">select</span>
+<span class="k">when</span> event <span class="o">=</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.redis.await(<span class="t">MyEventHandled</span>, parent_event_id: event.event_id)
+  puts <span class="s">&quot;Handled&quot;</span>
+<span class="k">when</span> <span class="t">Timer</span>.<span class="k">new</span>(<span class="n">30</span>.seconds)
+  raise <span class="s">&quot;Timeout!&quot;</span>
+<span class="k">end</span></code></pre>
+
+<h3><code>Subscriber</code> and <code>Consumer</code></h3>
+
+<p>You can include the <code>Subscriber(T)</code> and <code>Consumer(T)</code> modules into an object, turning it into an event (<code>T</code>) subscriber or consumer. It must implement <code>handle(event : T)</code> and be explicitly subscribed to a channel.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">Actor</span><span class="t">::</span><span class="t">Logger</span>
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Subscriber</span>(<span class="t">Event</span><span class="t">::</span><span class="t">User</span><span class="t">::</span><span class="t">Registered</span>)
+  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Consumer</span>(<span class="t">Event</span><span class="t">::</span><span class="t">Payment</span><span class="t">::</span><span class="t">Successfull</span>)
+
+  <span class="c"># This method will be called in *all* Actor::Logger instances</span>
+  <span class="k">def</span> <span class="m">handle</span>(event : <span class="t">Event</span><span class="t">::</span><span class="t">User</span><span class="t">::</span><span class="t">Registered</span>)
+    log_into_terminal(<span class="s">&quot;New user with id </span><span class="i">#{</span>event.id<span class="i">}</span><span class="s">&quot;</span>)
+  <span class="k">end</span>
+
+  <span class="c"># This method will be called in only *one* Actor::Logger instance</span>
+  <span class="k">def</span> <span class="m">handle</span>(event : <span class="t">Event</span><span class="t">::</span><span class="t">Payment</span><span class="t">::</span><span class="t">Successfull</span>)
+    send_email(<span class="s">&quot;admin@example.com&quot;</span>, <span class="s">&quot;New payment of $</span><span class="i">#{</span>event.amount<span class="i">}</span><span class="s">&quot;</span>)
   <span class="k">end</span>
 <span class="k">end</span>
 
-notifier <span class="o">=</span> <span class="t">Notifier</span>.<span class="k">new</span>(channel)</code></pre>
+actor <span class="o">=</span> <span class="t">Actor</span><span class="t">::</span><span class="t">Logger</span>.<span class="k">new</span>
+actor.subscribe(<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory)   <span class="c"># Non-blocking method</span>
+actor.unsubscribe(<span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span>.memory) <span class="c"># Can be unsubscribed as well</span></code></pre>
 
-<p>Then emit the event:</p>
+<h2>Documentation 📚</h2>
 
-<pre><code class="language-crystal">channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))</code></pre>
-
-<p>All subscribers will asynchronously notified of the new event. You can then unsubscribe:</p>
-
-<pre><code class="language-crystal">channel.unsubscribe(notifier)</code></pre>
-
-<h3>Using with Onyx top-level macros</h3>
-
-<p><a href="https://github.com/onyxframework/onyx" target="_blank">Onyx</a> shard has convenient macros to reduce boilerplate code. Once <a href="https://github.com/onyxframework/onyx#eda" target="_blank"><code>"onyx/eda"</code></a> is required, a singleton <code>Onyx.channel</code> is defined. You can then specify which channel to use, for example, <code>Onyx.channel(:redis)</code>.</p>
-
-<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;onyx/eda&quot;</span>
-
-<span class="k">struct</span> <span class="t">MyEvent</span>
-  <span class="c"># ditto</span>
-<span class="k">end</span>
-
-<span class="t">Onyx</span>.channel(<span class="n">:redis</span>)
-
-<span class="t">Onyx</span>.subscribe(<span class="t">Object</span>, <span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  <span class="c"># ditto</span>
-<span class="k">end</span>
-
-<span class="t">Onyx</span>.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))
-<span class="c"># or</span>
-<span class="t">Onyx</span>.channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>(<span class="s">&quot;bar&quot;</span>))
-
-sleep(<span class="n">0.1</span>)
-
-<span class="t">Onyx</span>.unsubscibe(<span class="t">Object</span>)</code></pre>
+<p>The documentation is available online at <a href="https://docs.onyxframework.org/eda" target="_blank">docs.onyxframework.org/eda</a>.</p>
 
 <h2>Community 🍪</h2>
 
-<p>There are multiple places to talk about this particular shard and about other ones as well:</p>
+<p>There are multiple places to talk about Onyx:</p>
 
-<ul><li><a href="https://gitter.im/onyxframework/eda" target="_blank">Onyx::EDA Gitter chat</a></li><li><a href="https://gitter.im/onyxframework" target="_blank">Onyx Framework Gitter community</a></li><li><a href="https://gitter.im/vladfaust" target="_blank">Vlad Faust Gitter community</a></li><li><a href="https://twitter.com/onyxframework" target="_blank">Onyx Framework Twitter</a></li><li><a href="https://telegram.me/onyxframework" target="_blank">Onyx Framework Telegram channel</a></li></ul>
+<ul><li><a href="https://gitter.im/onyxframework" target="_blank">Gitter</a></li><li><a href="https://twitter.com/onyxframework" target="_blank">Twitter</a></li></ul>
 
-<h2>Support ❤️</h2>
+<h2>Support 🕊</h2>
 
 <p>This shard is maintained by me, <a href="https://vladfaust.com" target="_blank">Vlad Faust</a>, a passionate developer with years of programming and product experience. I love creating Open-Source and I want to be able to work full-time on Open-Source projects.</p>
 
-<p>I will do my best to answer your questions in the free communication channels above, but if you want prioritized support, then please consider becoming my patron. Your issues will be labeled with your patronage status, and if you have a sponsor tier, then you and your team be able to communicate with me in private or semi-private channels such as e-mail and <a href="https://twist.com" target="_blank">Twist</a>. There are other perks to consider, so please, don't hesistate to check my Patreon page:</p>
+<p>I will do my best to answer your questions in the free communication channels above, but if you want prioritized support, then please consider becoming my patron. Your issues will be labeled with your patronage status, and if you have a sponsor tier, then you and your team be able to communicate with me privately in <a href="https://twist.com" target="_blank">Twist</a>. There are other perks to consider, so please, don't hesistate to check my Patreon page:</p>
 
 <p>&lt;a href="https://www.patreon.com/vladfaust">&lt;img height="50" src="https://onyxframework.org/img/patreon-button.svg">&lt;/a></p>
 
-<p>You could also help me a lot if you leave a star to this GitHub repository and spread the world about Crystal and Onyx! 📣</p>
+<p>You could also help me a lot if you leave a star to this GitHub repository and spread the word about Crystal and Onyx! 📣</p>
 
 <h2>Contributing</h2>
 

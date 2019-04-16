@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/onyxframework/eda">
-  <title>Onyx::EDA::Event - github.com/onyxframework/eda</title>
+  <title>Onyx::EDA::Consumer(T) - github.com/onyxframework/eda</title>
 </head>
 <body>
 
@@ -91,12 +91,12 @@
       
     </li>
   
-  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Consumer" data-name="onyx::eda::consumer(t)">
+  <li class=" current" data-id="github.com/onyxframework/eda/Onyx/EDA/Consumer" data-name="onyx::eda::consumer(t)">
       <a href="../../Onyx/EDA/Consumer.html">Consumer</a>
       
     </li>
   
-  <li class=" current" data-id="github.com/onyxframework/eda/Onyx/EDA/Event" data-name="onyx::eda::event">
+  <li class=" " data-id="github.com/onyxframework/eda/Onyx/EDA/Event" data-name="onyx::eda::event">
       <a href="../../Onyx/EDA/Event.html">Event</a>
       
     </li>
@@ -130,7 +130,7 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Onyx::EDA::Event
+  <span class="kind">module</span> Onyx::EDA::Consumer(T)
 
 </h1>
 
@@ -140,35 +140,23 @@
 
   <h2>Overview</h2>
 
-  <p>A basic event module to include.</p>
+  <p>A module which would make an including object an event consumer.
+Consumption differs from subscription in a way that only a single consumption
+instance with certain ID would be notified about an event.
+In this module, consumer ID equals to the including object class name.</p>
 
-<p>According to <a href="https://en.wikipedia.org/wiki/Event-driven_architecture#Event_flow_layers" target="_blank">Wikipedia</a>:</p>
-
-<blockquote>a significant temporal state or fact</blockquote>
-
-<p>Code example:</p>
-
-<pre><code><span class="k">struct</span> <span class="t">MyEvent</span>
-  <span class="k">include</span> <span class="t">Onyx</span><span class="t">::</span><span class="t">EDA</span><span class="t">::</span><span class="t">Event</span>
-
-  getter foo
-
-  <span class="k">def</span> <span class="m">initialize</span>(@foo : <span class="t">String</span>)
-  <span class="k">end</span>
-<span class="k">end</span>
-
-channel.subscribe(<span class="t">MyEvent</span>) <span class="k">do</span> <span class="o">|</span>event<span class="o">|</span>
-  puts event.foo
-<span class="k">end</span>
-
-event <span class="o">=</span> channel.emit(<span class="t">MyEvent</span>.<span class="k">new</span>)
-pp event.event_id <span class="c"># =&gt; &lt;UUID&gt;</span>
-
-sleep <span class="c"># You need to yield the control, see more in Channel docs</span></code></pre>
+<p>This module behaves a lot like <code><a href="../../Onyx/EDA/Subscriber.html">Subscriber</a></code>, see its docs for details.</p>
 
 
 
 
+
+  <h2>Included Modules</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Onyx/EDA/Actor.html">Onyx::EDA::Actor</a></li>
+  
+  </ul>
 
 
 
@@ -182,15 +170,8 @@ sleep <span class="c"># You need to yield the control, see more in Channel docs<
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/event.cr#L30" target="_blank">
-        onyx-eda/event.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/channel/redis.cr#L22" target="_blank">
-        onyx-eda/channel/redis.cr
+      <a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/consumer.cr#L7" target="_blank">
+        onyx-eda/consumer.cr
       </a>
     
     <br/>
@@ -208,9 +189,9 @@ sleep <span class="c"># You need to yield the control, see more in Channel docs<
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#event_id%3AUUID-instance-method" class="signature"><strong>#event_id</strong> : UUID</a>
+        <a href="#handle%28event%3AT%29-instance-method" class="signature"><strong>#handle</strong>(event : T)</a>
         
-          <div class="summary"><p>This event ID.</p></div>
+          <div class="summary"><p>Handle incoming event.</p></div>
         
       </li>
     
@@ -222,6 +203,30 @@ sleep <span class="c"># You need to yield the control, see more in Channel docs<
 
 <div class="methods-inherited">
   
+    
+
+  <h3>Instance methods inherited from module <code><a href="../../Onyx/EDA/Actor.html">Onyx::EDA::Actor</a></code></h3>
+  
+  
+    <a href="../../Onyx/EDA/Actor.html#subscribe%28channel%3AOnyx%3A%3AEDA%3A%3AChannel%29%3Aself-instance-method" class="tooltip">
+      <span>subscribe(channel : Onyx::EDA::Channel) : <span class="k">self</span></span>
+    subscribe</a>, 
+    
+  
+    <a href="../../Onyx/EDA/Actor.html#unsubscribe%28channel%3AOnyx%3A%3AEDA%3A%3AChannel%29%3Aself-instance-method" class="tooltip">
+      <span>unsubscribe(channel : Onyx::EDA::Channel) : <span class="k">self</span></span>
+    unsubscribe</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
@@ -231,20 +236,22 @@ sleep <span class="c"># You need to yield the control, see more in Channel docs<
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="event_id:UUID-instance-method">
+    <div class="entry-detail" id="handle(event:T)-instance-method">
       <div class="signature">
-        
-        def <strong>event_id</strong> : <a href="../../UUID.html">UUID</a>
+        abstract 
+        def <strong>handle</strong>(event : T)
 
-        <a class="method-permalink" href="#event_id%3AUUID-instance-method">#</a>
+        <a class="method-permalink" href="#handle%28event%3AT%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>This event ID. Defaults to a random <code><a href="../../UUID.html">UUID</a></code>.</p></div>
+        <div class="doc"><p>Handle incoming event. Must be defined explicitly in a consumer.</p>
+
+<p><span class="flag orange">TODO</span>  Find a way to enable per-event custom ID.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/event.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/093b4466ce5c3f1687cc74784c54270ae53df2bb/src/onyx-eda/consumer.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
