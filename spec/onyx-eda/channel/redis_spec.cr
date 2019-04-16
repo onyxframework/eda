@@ -38,7 +38,7 @@ class Onyx::EDA::Channel::Redis
           buffer["c"] = event.payload
         end
 
-        Fiber.yield
+        sleep(0.25)
         channel.emit(TestEvent::A.new("foo"), TestEvent::B.new(42))
         sleep(0.25)
 
