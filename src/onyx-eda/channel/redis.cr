@@ -79,24 +79,33 @@ module Onyx::EDA
     @siphash_key = StaticArray(UInt8, 16).new(0)
 
     # Initialize with Redis *uri* and Redis *namespace*.
-    def self.new(uri : URI, namespace : String = "onyx-eda")
-      new(MiniRedis.new(uri), MiniRedis.new(uri), namespace)
+    # *args* and *nargs* are passed directly to a `MiniRedis` instance.
+    def self.new(uri : URI, namespace : String = "onyx-eda", *args, **nargs)
+      new(
+        MiniRedis.new(uri, *args, **nargs),
+        MiniRedis.new(uri, *args, **nargs),
+        namespace
+      )
     end
 
     # ditto
-    def self.new(uri : String, namespace : String = "onyx-eda")
-      new(MiniRedis.new(URI.parse(uri)), MiniRedis.new(URI.parse(uri)), namespace)
+    def self.new(uri : String, namespace : String = "onyx-eda", *args, **nargs)
+      new(
+        MiniRedis.new(URI.parse(uri), *args, **nargs),
+        MiniRedis.new(URI.parse(uri), *args, **nargs),
+        namespace
+      )
     end
 
     # Explicitly initialize with two [`MiniRedis`](https://github.com/vladfaust/mini_redis)
     # instances (one would block-read and another would issue commands)
     # and Redis *namespace*.
     def initialize(
-      @redis : MiniRedis = MiniRedis.new,
-      @sidekick : MiniRedis = MiniRedis.new,
+      @redis : MiniRedis,
+      @sidekick : MiniRedis,
       @namespace : String = "onyx-eda"
     )
-      @client_id = @redis.command("CLIENT ID").raw.as(Int64)
+      @client_id = @redis.send("CLIENT", "ID").raw.as(Int64)
       spawn routine
     end
 
@@ -106,19 +115,22 @@ module Onyx::EDA
     # This method **blocks** until all subscribers to this event read it from the stream.
     #
     # TODO: Allow to change `MAXLEN`.
-    def emit(events : Enumerable(T), transaction : MiniRedis::Transaction? = nil) : Enumerable(T) forall T
+    def emit(
+      events : Enumerable(T),
+      redis : MiniRedis = @sidekick
+    ) : Enumerable(T) forall T
       {% raise "Can only emit non-abstract event objects (given `#{T}`)" unless (T < Reference || T < Struct) && !T.abstract? && !T.union? %}
 
       stream = T.to_redis_key
 
-      proc = ->(tx : MiniRedis::Transaction) do
+      proc = ->(r : MiniRedis) do
         events.each do |event|
-          tx.send(
+          r.send(
             "XADD",
-            "#{@namespace}:#{stream}",
+            @namespace + ':' + stream,
             "MAXLEN",
             "~",
-            "1000",
+            1000,
             "*",
             "pld",
             event.to_msgpack,
@@ -126,10 +138,10 @@ module Onyx::EDA
         end
       end
 
-      if transaction
-        response = proc.call(transaction)
+      if redis.transaction?
+        response = proc.call(redis)
       else
-        response = @sidekick.transaction(&proc)
+        response = redis.transaction(&proc)
       end
 
       events
@@ -160,6 +172,7 @@ module Onyx::EDA
     end
 
     # Subscribe to an *event* reading from its stream.
+    # You should yield the control to actually start reading.
     # See `Channel#subscribe(event, **filter, &block)`.
     def subscribe(
       event : T.class,
@@ -202,7 +215,12 @@ module Onyx::EDA
       timeout : Time::Span = 5.seconds
     ) : Bool forall T
       key = "#{@namespace}:lock:#{T.to_redis_key}:#{consumer_id}:#{event.event_id.hexstring}"
-      response = @sidekick.command("SET #{key} t PX #{(timeout.total_seconds * 1000).round.to_i} NX")
+
+      response = @sidekick.send(
+        "SET", key, "t",
+        "PX", (timeout.total_seconds * 1000).round.to_i,
+        "NX"
+      )
 
       return !response.raw.nil?
     end
@@ -237,7 +255,7 @@ module Onyx::EDA
 
           begin
             @blocked = true
-            @redis.command("BLPOP #{UUID.random} 0")
+            @redis.send("BLPOP", UUID.random.to_slice, 0)
           rescue ex : MiniRedis::Error
             if ex.message =~ /^UNBLOCKED/
               next @blocked = false
@@ -251,11 +269,11 @@ module Onyx::EDA
           begin
             @blocked = true
 
-            response = @redis.command(
-              "XREAD COUNT 1 BLOCK 0 STREAMS " +
-              streams.map { |s| "#{@namespace}:#{s}" }.join(' ') + ' ' +
-              streams.map { |s| last_read_ids.fetch(s) { now } }.join(' ')
-            )
+            commands = ["XREAD", "COUNT", 1, "BLOCK", 0, "STREAMS"]
+            commands.concat(streams.map { |s| @namespace + ':' + s })
+            commands.concat(streams.map { |s| last_read_ids.fetch(s) { now } })
+
+            response = @redis.send(commands)
           rescue ex : MiniRedis::Error
             if ex.message =~ /^UNBLOCKED/
               break @blocked = false
@@ -301,7 +319,7 @@ module Onyx::EDA
     # Unblock the subscribed client.
     protected def unblock_client
       if @blocked
-        @sidekick.command("CLIENT UNBLOCK #{@client_id} ERROR")
+        @sidekick.send("CLIENT", "UNBLOCK", @client_id, "ERROR")
         @blocked = false
       end
     end

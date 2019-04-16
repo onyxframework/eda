@@ -21,7 +21,7 @@ class Onyx::EDA::Channel::Redis
   end
 
   describe self do
-    channel = self.new(ENV["REDIS_URL"])
+    channel = self.new(ENV["REDIS_URL"], logger: Logger.new(STDOUT))
     buffer = Hash(String, String | Int32).new
 
     describe "subscription" do
@@ -38,8 +38,9 @@ class Onyx::EDA::Channel::Redis
           buffer["c"] = event.payload
         end
 
+        Fiber.yield
         channel.emit(TestEvent::A.new("foo"), TestEvent::B.new(42))
-        sleep(0.1)
+        sleep(0.25)
 
         buffer["a"].should eq "foo"
         buffer["b"].should eq 42
@@ -48,7 +49,7 @@ class Onyx::EDA::Channel::Redis
         buffer.clear
 
         channel.emit(TestEvent::B.new(43))
-        sleep(0.1)
+        sleep(0.25)
 
         buffer["a"]?.should be_nil # A is not emitted
         buffer["b"].should eq 43
