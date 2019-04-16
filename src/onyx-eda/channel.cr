@@ -7,12 +7,16 @@ module Onyx::EDA
   # It implements basic logic used in other channels.
   abstract class Channel
     # Emit *events* returning themselves.
+    # This method usually blocks until all events are delivered,
+    # but the subscription block calls happen asynchronously.
     abstract def emit(events : Enumerable) : Enumerable
 
     # ditto
     abstract def emit(*events) : Enumerable
 
-    # ditto
+    # Emit *event* returning itself.
+    # This method usually blocks until the event is delivered,
+    # but the subscription block calls happen asynchronously.
     abstract def emit(event : T) : T forall T
 
     # Subscribe to an *event*. Returns a `Subscription` instance, which can be cancelled.

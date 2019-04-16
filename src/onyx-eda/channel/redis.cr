@@ -89,8 +89,8 @@ module Onyx::EDA
     end
 
     # Explicitly initialize with two [`MiniRedis`](https://github.com/vladfaust/mini_redis)
-    # (one would block-read and another would issue commands)
-    # instances and Redis *namespace*.
+    # instances (one would block-read and another would issue commands)
+    # and Redis *namespace*.
     def initialize(
       @redis : MiniRedis = MiniRedis.new,
       @sidekick : MiniRedis = MiniRedis.new,
@@ -102,6 +102,10 @@ module Onyx::EDA
 
     # Emit *events*, sending them to an appropriate stream. See `Channel#emit`.
     # The underlying `XADD` command has `MAXLEN ~ 1000` option.
+    #
+    # This method **blocks** until all subscribers to this event read it from the stream.
+    #
+    # TODO: Allow to change `MAXLEN`.
     def emit(events : Enumerable(T), transaction : MiniRedis::Transaction? = nil) : Enumerable(T) forall T
       {% raise "Can only emit non-abstract event objects (given `#{T}`)" unless (T < Reference || T < Struct) && !T.abstract? && !T.union? %}
 
@@ -150,7 +154,7 @@ module Onyx::EDA
       events
     end
 
-    # ditto
+    # See `#emit(events)`.
     def emit(event : T) : T forall T
       emit({event}).first
     end
@@ -168,8 +172,10 @@ module Onyx::EDA
     end
 
     # Begin consuming an *event* reading from its stream. It is guaranteed that
-    # only a **single** consuming subscription with given *id* would be notified about
-    # an event. But such notifications are non-reliable, i.e. a single consumer
+    # only a **single** consuming subscription with given *id* accross the whole
+    # application would be notified about an event.
+    #
+    # But such notifications are non-reliable, i.e. a single consumer
     # could crash during event handling, meaning that this event would not be handled
     # properly. If you need reliability, use a background job processing istead,
     # for example, [Worcr](https://worcr.com).
