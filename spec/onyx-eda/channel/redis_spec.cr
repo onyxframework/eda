@@ -77,6 +77,7 @@ class Onyx::EDA::Channel::Redis
           buffer["c"] = event.payload
         end
 
+        sleep(0.1)
         channel.emit(TestEvent::A.new("foo"), TestEvent::B.new(42))
         sleep(0.1)
 

@@ -107,6 +107,7 @@ module Onyx::EDA
     )
       @client_id = @redis.send("CLIENT", "ID").raw.as(Int64)
       spawn routine
+      spawn unblocking_routine
     end
 
     # Emit *events*, sending them to an appropriate stream. See `Channel#emit`.
@@ -231,7 +232,7 @@ module Onyx::EDA
       before = (@subscriptions.keys + @consumers.keys).uniq!
 
       yield.tap do
-        unblock_client if before != (@subscriptions.keys + @consumers.keys).uniq!
+        want_unblock if before != (@subscriptions.keys + @consumers.keys).uniq!
       end
     end
 
@@ -316,11 +317,23 @@ module Onyx::EDA
       end
     end
 
+    @unblock_channel = ::Channel(Nil).new(1)
+
+    protected def unblocking_routine
+      loop do
+        @unblock_channel.receive
+
+        if @blocked
+          @sidekick.send("CLIENT", "UNBLOCK", @client_id, "ERROR")
+          @blocked = false
+        end
+      end
+    end
+
     # Unblock the subscribed client.
-    protected def unblock_client
-      if @blocked
-        @sidekick.send("CLIENT", "UNBLOCK", @client_id, "ERROR")
-        @blocked = false
+    protected def want_unblock
+      spawn do
+        @unblock_channel.send(nil) unless @unblock_channel.full?
       end
     end
   end
