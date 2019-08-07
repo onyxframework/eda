@@ -10,6 +10,6 @@ struct UUID
 
   # Serialize into MessagePack bytes.
   def to_msgpack(packer : MessagePack::Packer)
-    to_slice.to_msgpack(packer)
+    bytes.to_slice.to_msgpack(packer)
   end
 end

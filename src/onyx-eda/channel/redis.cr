@@ -256,7 +256,7 @@ module Onyx::EDA
 
           begin
             @blocked = true
-            @redis.send("BLPOP", UUID.random.to_slice, 0)
+            @redis.send("BLPOP", UUID.random.bytes.to_slice, 0)
           rescue ex : MiniRedis::Error
             if ex.message =~ /^UNBLOCKED/
               next @blocked = false
