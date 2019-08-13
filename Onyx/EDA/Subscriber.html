@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.29.0">
+<meta name="generator" content="Crystal Docs 0.30.1">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -144,7 +144,7 @@
 Subscribers are notified about every incoming event of type <code>T</code>.</p>
 
 <p>A single object can have multiple <code><a href="../../Onyx/EDA/Subscriber.html">Subscriber</a></code> and <code><a href="../../Onyx/EDA/Consumer.html">Consumer</a></code> modules included,
-just make sure you have <code><a href="../../Onyx/EDA/Subscriber.html#handle%28event%3AT%29-instance-method">#handle</a></code> method defined for each event.</p>
+just make sure you have <code><a href="../../Onyx/EDA/Subscriber.html#handle(event:T)-instance-method">#handle</a></code> method defined for each event.</p>
 
 <p><span class="flag purple">NOTE</span>  You can not have <strong>both</strong> <code><a href="../../Onyx/EDA/Subscriber.html">Subscriber</a></code> and <code><a href="../../Onyx/EDA/Consumer.html">Consumer</a></code> modules included for
 a single event type.</p>
@@ -198,7 +198,7 @@ actor.unsubscribe(channel)</code></pre>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/subscriber.cr#L37" target="_blank">
+      <a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/subscriber.cr#L37" target="_blank">
         onyx-eda/subscriber.cr
       </a>
     
@@ -217,7 +217,7 @@ actor.unsubscribe(channel)</code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#handle%28event%3AT%29-instance-method" class="signature"><strong>#handle</strong>(event : T)</a>
+        <a href="#handle(event:T)-instance-method" class="signature"><strong>#handle</strong>(event : T)</a>
         
           <div class="summary"><p>Handle incoming event.</p></div>
         
@@ -236,12 +236,12 @@ actor.unsubscribe(channel)</code></pre>
   <h3>Instance methods inherited from module <code><a href="../../Onyx/EDA/Actor.html">Onyx::EDA::Actor</a></code></h3>
   
   
-    <a href="../../Onyx/EDA/Actor.html#subscribe%28channel%3AOnyx%3A%3AEDA%3A%3AChannel%29%3Aself-instance-method" class="tooltip">
+    <a href="../../Onyx/EDA/Actor.html#subscribe(channel:Onyx::EDA::Channel):self-instance-method" class="tooltip">
       <span>subscribe(channel : Onyx::EDA::Channel) : <span class="k">self</span></span>
     subscribe</a>, 
     
   
-    <a href="../../Onyx/EDA/Actor.html#unsubscribe%28channel%3AOnyx%3A%3AEDA%3A%3AChannel%29%3Aself-instance-method" class="tooltip">
+    <a href="../../Onyx/EDA/Actor.html#unsubscribe(channel:Onyx::EDA::Channel):self-instance-method" class="tooltip">
       <span>unsubscribe(channel : Onyx::EDA::Channel) : <span class="k">self</span></span>
     unsubscribe</a>
     
@@ -269,7 +269,7 @@ actor.unsubscribe(channel)</code></pre>
         abstract 
         def <strong>handle</strong>(event : T)
 
-        <a class="method-permalink" href="#handle%28event%3AT%29-instance-method">#</a>
+        <a class="method-permalink" href="#handle(event:T)-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Handle incoming event. Must be defined explicitly in a consumer.</p>
@@ -279,7 +279,7 @@ actor.unsubscribe(channel)</code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/subscriber.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/subscriber.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>

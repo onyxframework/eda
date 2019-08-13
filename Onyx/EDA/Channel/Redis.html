@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.29.0">
+<meta name="generator" content="Crystal Docs 0.30.1">
 
 
 <link href="../../../css/style.css" rel="stylesheet" type="text/css">
@@ -194,7 +194,7 @@ sleep</code></pre>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L76" target="_blank">
+      <a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L76" target="_blank">
         onyx-eda/channel/redis.cr
       </a>
     
@@ -209,21 +209,21 @@ sleep</code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28redis%3AMiniRedis%2Csidekick%3AMiniRedis%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%29-class-method" class="signature"><strong>.new</strong>(redis : MiniRedis, sidekick : MiniRedis, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>)</a>
+        <a href="#new(redis:MiniRedis,sidekick:MiniRedis,namespace:String=&quot;onyx-eda&quot;)-class-method" class="signature"><strong>.new</strong>(redis : MiniRedis, sidekick : MiniRedis, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>)</a>
         
           <div class="summary"><p>Explicitly initialize with two <a href="https://github.com/vladfaust/mini_redis" target="_blank"><code>MiniRedis</code></a> instances (one would block-read and another would issue commands) and Redis <em>namespace</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28uri%3AURI%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%2C%2Aargs%2C%2A%2Anargs%29-class-method" class="signature"><strong>.new</strong>(uri : URI, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)</a>
+        <a href="#new(uri:URI,namespace:String=&quot;onyx-eda&quot;,*args,**nargs)-class-method" class="signature"><strong>.new</strong>(uri : URI, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)</a>
         
           <div class="summary"><p>Initialize with Redis <em>uri</em> and Redis <em>namespace</em>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28uri%3AString%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%2C%2Aargs%2C%2A%2Anargs%29-class-method" class="signature"><strong>.new</strong>(uri : String, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)</a>
+        <a href="#new(uri:String,namespace:String=&quot;onyx-eda&quot;,*args,**nargs)-class-method" class="signature"><strong>.new</strong>(uri : String, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)</a>
         
           <div class="summary"><p>Initialize with Redis <em>uri</em> and Redis <em>namespace</em>.</p></div>
         
@@ -239,44 +239,44 @@ sleep</code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#emit%28events%3AEnumerable%28T%29%2Credis%3AMiniRedis%3D%40sidekick%29%3AEnumerable%28T%29forallT-instance-method" class="signature"><strong>#emit</strong>(events : Enumerable(T), redis : MiniRedis = @sidekick) : Enumerable(T) forall T</a>
+        <a href="#emit(events:Enumerable(T),redis:MiniRedis=@sidekick):Enumerable(T)forallT-instance-method" class="signature"><strong>#emit</strong>(events : Enumerable(T), redis : MiniRedis = @sidekick) : Enumerable(T) forall T</a>
         
           <div class="summary"><p>Emit <em>events</em>, sending them to an appropriate stream.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#emit%28event%3AT%29%3ATforallT-instance-method" class="signature"><strong>#emit</strong>(event : T) : T forall T</a>
+        <a href="#emit(event:T):TforallT-instance-method" class="signature"><strong>#emit</strong>(event : T) : T forall T</a>
         
-          <div class="summary"><p>See <code><a href="../../../Onyx/EDA/Channel/Redis.html#emit%28event%3AT%29%3ATforallT-instance-method">#emit(events)</a></code>.</p></div>
+          <div class="summary"><p>See <code><a href="../../../Onyx/EDA/Channel/Redis.html#emit(event:T):TforallT-instance-method">#emit(events)</a></code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#emit%28%2Aevents%3A%2AT%29%3AEnumerableforallT-instance-method" class="signature"><strong>#emit</strong>(*events : <span class="o">*</span><span class="t">T</span>) : Enumerable forall T</a>
+        <a href="#emit(*events:*T):EnumerableforallT-instance-method" class="signature"><strong>#emit</strong>(*events : <span class="o">*</span><span class="t">T</span>) : Enumerable forall T</a>
         
           <div class="summary"><p>Emit <em>events</em>, sending them to an appropriate stream.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3ASubscriptionforallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : Subscription forall T</a>
+        <a href="#subscribe(event:T.class,consumer_id:String,&block:T-%3EUNDERSCORE):SubscriptionforallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : Subscription forall T</a>
         
           <div class="summary"><p>Begin consuming an <em>event</em> reading from its stream.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#subscribe%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EUNDERSCORE%29%3ASubscriptionforallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : Subscription forall T</a>
+        <a href="#subscribe(event:T.class,**filter,&block:T-%3EUNDERSCORE):SubscriptionforallT-instance-method" class="signature"><strong>#subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : Subscription forall T</a>
         
           <div class="summary"><p>Subscribe to an <em>event</em> reading from its stream.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method" class="signature"><strong>#unsubscribe</strong>(subscription : Subscription) : Bool</a>
+        <a href="#unsubscribe(subscription:Subscription):Bool-instance-method" class="signature"><strong>#unsubscribe</strong>(subscription : Subscription) : Bool</a>
         
-          <div class="summary"><p>See <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">Channel#unsubscribe</a></code>.</p></div>
+          <div class="summary"><p>See <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe(subscription:Subscription):Bool-instance-method">Channel#unsubscribe</a></code>.</p></div>
         
       </li>
     
@@ -293,22 +293,22 @@ sleep</code></pre>
   <h3>Instance methods inherited from class <code><a href="../../../Onyx/EDA/Channel.html">Onyx::EDA::Channel</a></code></h3>
   
   
-    <a href="../../../Onyx/EDA/Channel.html#await%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EU%29%3AUforallT%2CU-instance-method" class="tooltip">
+    <a href="../../../Onyx/EDA/Channel.html#await(event:T.class,**filter,&block:T-%3EU):UforallT,U-instance-method" class="tooltip">
       <span>await(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> U) : U forall T, U<br/>await(event, **filter)</span>
     await</a>, 
     
   
-    <a href="../../../Onyx/EDA/Channel.html#emit%28events%3AEnumerable%29%3AEnumerable-instance-method" class="tooltip">
+    <a href="../../../Onyx/EDA/Channel.html#emit(events:Enumerable):Enumerable-instance-method" class="tooltip">
       <span>emit(events : Enumerable) : Enumerable<br/>emit(event : T) : T forall T<br/>emit(*events) : Enumerable</span>
     emit</a>, 
     
   
-    <a href="../../../Onyx/EDA/Channel.html#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method" class="tooltip">
+    <a href="../../../Onyx/EDA/Channel.html#subscribe(event:T.class,consumer_id:String,&block:T-%3EUNDERSCORE):Onyx::EDA::Channel::Subscription(T)forallT-instance-method" class="tooltip">
       <span>subscribe(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : Onyx::EDA::Channel::Subscription(T) forall T<br/>subscribe(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : Onyx::EDA::Channel::Subscription(T) forall T</span>
     subscribe</a>, 
     
   
-    <a href="../../../Onyx/EDA/Channel.html#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method" class="tooltip">
+    <a href="../../../Onyx/EDA/Channel.html#unsubscribe(subscription:Subscription):Bool-instance-method" class="tooltip">
       <span>unsubscribe(subscription : Subscription) : Bool</span>
     unsubscribe</a>
     
@@ -352,7 +352,7 @@ sleep</code></pre>
         
         def self.<strong>new</strong>(redis : MiniRedis, sidekick : MiniRedis, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>)
 
-        <a class="method-permalink" href="#new%28redis%3AMiniRedis%2Csidekick%3AMiniRedis%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%29-class-method">#</a>
+        <a class="method-permalink" href="#new(redis:MiniRedis,sidekick:MiniRedis,namespace:String=&quot;onyx-eda&quot;)-class-method">#</a>
       </div>
       
         <div class="doc"><p>Explicitly initialize with two <a href="https://github.com/vladfaust/mini_redis" target="_blank"><code>MiniRedis</code></a>
@@ -362,7 +362,7 @@ and Redis <em>namespace</em>.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L103" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L103" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -372,7 +372,7 @@ and Redis <em>namespace</em>.</p></div>
         
         def self.<strong>new</strong>(uri : URI, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)
 
-        <a class="method-permalink" href="#new%28uri%3AURI%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%2C%2Aargs%2C%2A%2Anargs%29-class-method">#</a>
+        <a class="method-permalink" href="#new(uri:URI,namespace:String=&quot;onyx-eda&quot;,*args,**nargs)-class-method">#</a>
       </div>
       
         <div class="doc"><p>Initialize with Redis <em>uri</em> and Redis <em>namespace</em>.
@@ -381,7 +381,7 @@ and Redis <em>namespace</em>.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L83" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L83" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -391,7 +391,7 @@ and Redis <em>namespace</em>.</p></div>
         
         def self.<strong>new</strong>(uri : String, namespace : String = <span class="s">&quot;onyx-eda&quot;</span>, *args, **nargs)
 
-        <a class="method-permalink" href="#new%28uri%3AString%2Cnamespace%3AString%3D%26quot%3Bonyx-eda%26quot%3B%2C%2Aargs%2C%2A%2Anargs%29-class-method">#</a>
+        <a class="method-permalink" href="#new(uri:String,namespace:String=&quot;onyx-eda&quot;,*args,**nargs)-class-method">#</a>
       </div>
       
         <div class="doc"><p>Initialize with Redis <em>uri</em> and Redis <em>namespace</em>.
@@ -400,7 +400,7 @@ and Redis <em>namespace</em>.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L92" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -417,10 +417,10 @@ and Redis <em>namespace</em>.</p></div>
         
         def <strong>emit</strong>(events : Enumerable(T), redis : MiniRedis = @sidekick) : Enumerable(T) forall T
 
-        <a class="method-permalink" href="#emit%28events%3AEnumerable%28T%29%2Credis%3AMiniRedis%3D%40sidekick%29%3AEnumerable%28T%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit(events:Enumerable(T),redis:MiniRedis=@sidekick):Enumerable(T)forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Emit <em>events</em>, sending them to an appropriate stream. See <code><a href="../../../Onyx/EDA/Channel.html#emit%28events%3AEnumerable%29%3AEnumerable-instance-method">Channel#emit</a></code>.
+        <div class="doc"><p>Emit <em>events</em>, sending them to an appropriate stream. See <code><a href="../../../Onyx/EDA/Channel.html#emit(events:Enumerable):Enumerable-instance-method">Channel#emit</a></code>.
 The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.</p>
 
 <p>This method <strong>blocks</strong> until all subscribers to this event read it from the stream.</p>
@@ -430,7 +430,7 @@ The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.<
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L119" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L119" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -440,15 +440,15 @@ The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.<
         
         def <strong>emit</strong>(event : T) : T forall T
 
-        <a class="method-permalink" href="#emit%28event%3AT%29%3ATforallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit(event:T):TforallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>See <code><a href="../../../Onyx/EDA/Channel/Redis.html#emit%28event%3AT%29%3ATforallT-instance-method">#emit(events)</a></code>.</p></div>
+        <div class="doc"><p>See <code><a href="../../../Onyx/EDA/Channel/Redis.html#emit(event:T):TforallT-instance-method">#emit(events)</a></code>.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L171" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L171" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -458,10 +458,10 @@ The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.<
         
         def <strong>emit</strong>(*events : <span class="o">*</span><span class="t">T</span>) : Enumerable forall T
 
-        <a class="method-permalink" href="#emit%28%2Aevents%3A%2AT%29%3AEnumerableforallT-instance-method">#</a>
+        <a class="method-permalink" href="#emit(*events:*T):EnumerableforallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Emit <em>events</em>, sending them to an appropriate stream. See <code><a href="../../../Onyx/EDA/Channel.html#emit%28events%3AEnumerable%29%3AEnumerable-instance-method">Channel#emit</a></code>.
+        <div class="doc"><p>Emit <em>events</em>, sending them to an appropriate stream. See <code><a href="../../../Onyx/EDA/Channel.html#emit(events:Enumerable):Enumerable-instance-method">Channel#emit</a></code>.
 The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.</p>
 
 <p>This method <strong>blocks</strong> until all subscribers to this event read it from the stream.</p>
@@ -471,7 +471,7 @@ The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.<
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L152" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L152" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -481,7 +481,7 @@ The underlying <code>XADD</code> command has <code>MAXLEN ~ 1000</code> option.<
         
         def <strong>subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, consumer_id : String, &block : T -> UNDERSCORE) : <a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a> forall T
 
-        <a class="method-permalink" href="#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3ASubscriptionforallT-instance-method">#</a>
+        <a class="method-permalink" href="#subscribe(event:T.class,consumer_id:String,&block:T-%3EUNDERSCORE):SubscriptionforallT-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Begin consuming an <em>event</em> reading from its stream. It is guaranteed that
@@ -498,7 +498,7 @@ for example, <a href="https://worcr.com" target="_blank">Worcr</a>.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L198" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L198" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -508,7 +508,7 @@ for example, <a href="https://worcr.com" target="_blank">Worcr</a>.</p>
         
         def <strong>subscribe</strong>(event : <span class="t">T</span>.<span class="k">class</span>, **filter, &block : T -> UNDERSCORE) : <a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a> forall T
 
-        <a class="method-permalink" href="#subscribe%28event%3AT.class%2C%2A%2Afilter%2C%26block%3AT-%3EUNDERSCORE%29%3ASubscriptionforallT-instance-method">#</a>
+        <a class="method-permalink" href="#subscribe(event:T.class,**filter,&block:T-%3EUNDERSCORE):SubscriptionforallT-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Subscribe to an <em>event</em> reading from its stream.
@@ -518,7 +518,7 @@ See <code>Channel#subscribe(event, **filter, &block)</code>.</p></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L178" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L178" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -528,15 +528,15 @@ See <code>Channel#subscribe(event, **filter, &block)</code>.</p></div>
         
         def <strong>unsubscribe</strong>(subscription : <a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a>) : Bool
 
-        <a class="method-permalink" href="#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#unsubscribe(subscription:Subscription):Bool-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>See <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">Channel#unsubscribe</a></code>.</p></div>
+        <div class="doc"><p>See <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe(subscription:Subscription):Bool-instance-method">Channel#unsubscribe</a></code>.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/redis.cr#L209" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/redis.cr#L209" target="_blank">View source</a>]
         
       </div>
     </div>

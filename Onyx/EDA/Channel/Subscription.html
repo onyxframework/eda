@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.29.0">
+<meta name="generator" content="Crystal Docs 0.30.1">
 
 
 <link href="../../../css/style.css" rel="stylesheet" type="text/css">
@@ -145,9 +145,9 @@
   <p>An event subscription instance. All subscribers are notified about an event unless
 it doesn't match the filters.</p>
 
-<p>You should not initialize this class manually, use <code><a href="../../../Onyx/EDA/Channel.html#subscribe%28event%3AT.class%2Cconsumer_id%3AString%2C%26block%3AT-%3EUNDERSCORE%29%3AOnyx%3A%3AEDA%3A%3AChannel%3A%3ASubscription%28T%29forallT-instance-method">Channel#subscribe</a></code> instead.
+<p>You should not initialize this class manually, use <code><a href="../../../Onyx/EDA/Channel.html#subscribe(event:T.class,consumer_id:String,&block:T-%3EUNDERSCORE):Onyx::EDA::Channel::Subscription(T)forallT-instance-method">Channel#subscribe</a></code> instead.
 When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Channel/Subscription.html#unsubscribe-instance-method">#unsubscribe</a></code> method on a
-<code><a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a></code> instance or <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe%28subscription%3ASubscription%29%3ABool-instance-method">Channel#unsubscribe</a></code>.</p>
+<code><a href="../../../Onyx/EDA/Channel/Subscription.html">Subscription</a></code> instance or <code><a href="../../../Onyx/EDA/Channel.html#unsubscribe(subscription:Subscription):Bool-instance-method">Channel#unsubscribe</a></code>.</p>
 
 
 
@@ -165,14 +165,14 @@ When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Ch
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/subscription/inactive_error.cr#L2" target="_blank">
+      <a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/subscription/inactive_error.cr#L2" target="_blank">
         onyx-eda/channel/subscription/inactive_error.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/subscription.cr#L10" target="_blank">
+      <a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/subscription.cr#L10" target="_blank">
         onyx-eda/channel/subscription.cr
       </a>
     
@@ -191,7 +191,7 @@ When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Ch
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#active%3F-instance-method" class="signature"><strong>#active?</strong></a>
+        <a href="#active?-instance-method" class="signature"><strong>#active?</strong></a>
         
           <div class="summary"><p>Whether is this subscription currently active.</p></div>
         
@@ -246,7 +246,7 @@ When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Ch
         
         def <strong>active?</strong>
 
-        <a class="method-permalink" href="#active%3F-instance-method">#</a>
+        <a class="method-permalink" href="#active?-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Whether is this subscription currently active.</p></div>
@@ -254,7 +254,7 @@ When you want to stop subscription, call the <code><a href="../../../Onyx/EDA/Ch
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/subscription.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/subscription.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -274,7 +274,7 @@ May raise <code><a href="../../../Onyx/EDA/Channel/Subscription/InactiveError.ht
       <br/>
       <div>
         
-          [<a href="https://github.com/onyxframework/eda/blob/0d1441b8196ae72934fd9cf24b93b9a00e274395/src/onyx-eda/channel/subscription.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/onyxframework/eda/blob/b2aefa71e99b9dad2626343d11066c3297a5b62a/src/onyx-eda/channel/subscription.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
